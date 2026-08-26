@@ -1,0 +1,514 @@
+/* ==========================================
+   ADMIN PROBLEMS PAGE
+========================================== */
+
+.admin-problems-page {
+    width: 100%;
+    min-height: calc(100vh - 72px);
+
+    padding: 48px 5vw 80px;
+
+    box-sizing: border-box;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(91, 76, 255, 0.08),
+            transparent 35%
+        ),
+        #0b111a;
+
+    color: #f5f7ff;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.admin-problems-header {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto 32px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.admin-problems-eyebrow {
+    margin-bottom: 10px;
+
+    color: #7165ff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.admin-problems-header h1 {
+    margin: 0;
+
+    font-size: clamp(36px, 4vw, 50px);
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+}
+
+.admin-problems-header h1 span {
+    color: #6557ff;
+}
+
+.admin-problems-header p {
+    margin: 12px 0 0;
+
+    color: #7f8ca5;
+
+    font-size: 15px;
+}
+
+
+/* ==========================================
+   CREATE BUTTON
+========================================== */
+
+.admin-create-button {
+    flex-shrink: 0;
+
+    padding: 12px 20px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: #6557ff;
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 24px rgba(101, 87, 255, 0.2);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.admin-create-button:hover {
+    background: #7468ff;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   SUMMARY
+========================================== */
+
+.admin-problems-summary {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto 16px;
+
+    padding: 18px 22px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 1px solid #26364f;
+    border-radius: 12px;
+
+    background: #101a28;
+}
+
+.admin-problems-summary span {
+    color: #8391aa;
+
+    font-size: 14px;
+}
+
+.admin-problems-summary strong {
+    font-size: 22px;
+}
+
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.admin-problems-table {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    border: 1px solid #26364f;
+    border-radius: 14px;
+
+    background: #101a28;
+
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   TABLE HEADER
+========================================== */
+
+.admin-problems-table-header {
+    display: grid;
+
+    grid-template-columns:
+        minmax(250px, 2fr)
+        140px
+        minmax(180px, 1fr)
+        190px;
+
+    gap: 20px;
+
+    padding: 16px 24px;
+
+    border-bottom: 1px solid #26364f;
+
+    color: #71819d;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* ==========================================
+   PROBLEM ROW
+========================================== */
+
+.admin-problem-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(250px, 2fr)
+        140px
+        minmax(180px, 1fr)
+        190px;
+
+    gap: 20px;
+
+    align-items: center;
+
+    padding: 20px 24px;
+
+    border-bottom: 1px solid #202d41;
+
+    transition:
+        background 0.2s ease;
+}
+
+.admin-problem-row:last-child {
+    border-bottom: none;
+}
+
+.admin-problem-row:hover {
+    background: #131f2e;
+}
+
+
+/* ==========================================
+   TITLE
+========================================== */
+
+.admin-problem-title {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+
+    min-width: 0;
+}
+
+.admin-problem-title strong {
+    font-size: 15px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-problem-title small {
+    color: #5f6e87;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ==========================================
+   DIFFICULTY
+========================================== */
+
+.admin-difficulty {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 64px;
+
+    padding: 6px 10px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.admin-easy {
+    background: rgba(25, 217, 130, 0.12);
+    color: #19d982;
+}
+
+.admin-medium {
+    background: rgba(255, 183, 43, 0.12);
+    color: #ffb72b;
+}
+
+.admin-hard {
+    background: rgba(255, 84, 112, 0.12);
+    color: #ff5470;
+}
+
+
+/* ==========================================
+   TAGS
+========================================== */
+
+.admin-problem-tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+.admin-problem-tags span {
+    padding: 5px 8px;
+
+    border: 1px solid #293750;
+    border-radius: 5px;
+
+    background: #111b29;
+
+    color: #8c99b0;
+
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   ACTIONS
+========================================== */
+
+.admin-problem-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.admin-problem-actions button {
+    padding: 8px 13px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* EDIT */
+
+.admin-edit-button {
+    border: 1px solid #34445e;
+
+    background: #131e2d;
+
+    color: #aeb9cd;
+}
+
+.admin-edit-button:hover {
+    border-color: #6557ff;
+
+    color: #ffffff;
+
+    background: #18233a;
+}
+
+
+/* DELETE */
+
+.admin-delete-button {
+    border: 1px solid rgba(255, 84, 112, 0.3);
+
+    background: rgba(255, 84, 112, 0.06);
+
+    color: #ff6078;
+}
+
+.admin-delete-button:hover {
+    background: rgba(255, 84, 112, 0.14);
+
+    border-color: rgba(255, 84, 112, 0.5);
+}
+
+
+/* ==========================================
+   EMPTY
+========================================== */
+
+.admin-no-problems {
+    padding: 50px;
+
+    text-align: center;
+
+    color: #71819d;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.admin-problems-loading {
+    min-height: 60vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #8795ae;
+}
+
+
+/* ==========================================
+   ERROR
+========================================== */
+
+.admin-problems-error {
+    max-width: 500px;
+
+    margin: 80px auto;
+
+    padding: 28px;
+
+    border: 1px solid #3b2a38;
+    border-radius: 14px;
+
+    background: #151722;
+}
+
+.admin-problems-error h2 {
+    margin: 0 0 10px;
+
+    color: #ff6078;
+}
+
+.admin-problems-error p {
+    margin: 0 0 20px;
+
+    color: #9aa5b8;
+}
+
+.admin-problems-error button {
+    padding: 9px 16px;
+
+    border: 0;
+    border-radius: 7px;
+
+    background: #6557ff;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1000px) {
+
+    .admin-problems-table-header {
+        grid-template-columns:
+            minmax(200px, 2fr)
+            110px
+            1fr
+            150px;
+    }
+
+    .admin-problem-row {
+        grid-template-columns:
+            minmax(200px, 2fr)
+            110px
+            1fr
+            150px;
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 750px) {
+
+    .admin-problems-page {
+        padding: 32px 18px 60px;
+    }
+
+    .admin-problems-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .admin-create-button {
+        width: 100%;
+    }
+
+    .admin-problems-table {
+        overflow-x: auto;
+    }
+
+    .admin-problems-table-header,
+    .admin-problem-row {
+        min-width: 760px;
+    }
+
+}

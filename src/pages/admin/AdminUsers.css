@@ -1,0 +1,335 @@
+.admin-users-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.admin-users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.admin-users-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.admin-users-header h1 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.admin-users-header h1 span {
+    color: #3b82f6;
+}
+
+.admin-users-header p {
+    margin-top: 10px;
+    color: #64748b;
+    font-size: 15px;
+}
+
+.admin-users-refresh {
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: #334155;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.admin-users-refresh:hover {
+    background: #f8fafc;
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.admin-users-summary {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+}
+
+.admin-users-summary div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.admin-users-summary span {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.admin-users-summary strong {
+    font-size: 28px;
+    color: #0f172a;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.admin-users-table {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.admin-users-table-header,
+.admin-user-row {
+    min-width: 1000px;
+
+    display: grid;
+
+    grid-template-columns:
+        2fr
+        2fr
+        0.9fr
+        0.8fr
+        0.9fr
+        1.2fr;
+
+    align-items: center;
+    column-gap: 20px;
+}
+
+.admin-users-table-header {
+    padding: 16px 22px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.admin-user-row {
+    padding: 18px 22px;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background 0.15s ease;
+}
+
+.admin-user-row:last-child {
+    border-bottom: none;
+}
+
+.admin-user-row:hover {
+    background: #f8fafc;
+}
+
+
+/* =====================================================
+   USER
+===================================================== */
+
+.admin-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.admin-user-avatar {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    font-weight: 800;
+}
+
+.admin-user-info > div:last-child {
+    min-width: 0;
+}
+
+.admin-user-info strong {
+    display: block;
+    color: #0f172a;
+    font-size: 14px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-user-info small {
+    display: block;
+    margin-top: 3px;
+
+    color: #94a3b8;
+    font-size: 10px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   EMAIL
+===================================================== */
+
+.admin-user-email {
+    color: #475569;
+    font-size: 13px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   ROLE
+===================================================== */
+
+.admin-user-role {
+    display: inline-flex;
+
+    padding: 5px 10px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: capitalize;
+}
+
+.user-role {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.admin-role {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+
+/* =====================================================
+   NUMBERS
+===================================================== */
+
+.admin-user-number {
+    color: #0f172a;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+.admin-user-date {
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.admin-no-users {
+    padding: 60px 20px;
+    text-align: center;
+    color: #64748b;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.admin-users-loading {
+    padding: 80px 20px;
+    text-align: center;
+    color: #64748b;
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.admin-users-error {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.admin-users-error h2 {
+    color: #dc2626;
+    margin-bottom: 10px;
+}
+
+.admin-users-error p {
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+.admin-users-error button {
+    border: none;
+    background: #0f172a;
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .admin-users-page {
+        padding: 24px;
+    }
+
+    .admin-users-header {
+        flex-direction: column;
+    }
+
+}

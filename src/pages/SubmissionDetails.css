@@ -1,0 +1,721 @@
+/* =========================================================
+   NEXUS — SUBMISSION DETAILS
+========================================================= */
+
+.submission-details-page {
+  --submission-bg: #0b0f17;
+  --submission-panel: #111722;
+  --submission-panel-2: #151c28;
+  --submission-border: #283345;
+
+  --submission-purple: #635bff;
+  --submission-purple-light: #8b87ff;
+
+  --submission-text: #f3f5f8;
+  --submission-muted: #8d99ad;
+
+  max-width: 1450px;
+  margin: 0 auto;
+
+  padding: 28px 32px 70px;
+
+  color: var(--submission-text);
+
+  animation: submissionFadeIn 0.4s ease both;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.submission-details-page > .flex.flex-wrap {
+  margin-bottom: 8px;
+}
+
+.submission-details-page .btn {
+  border-radius: 8px;
+
+  font-weight: 650;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.submission-details-page .btn:hover {
+  transform: translateY(-1px);
+}
+
+.submission-details-page .btn-ghost {
+  color: #9da8b9;
+}
+
+.submission-details-page .btn-ghost:hover {
+  color: #e9ecf2;
+
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.submission-details-page .btn-outline {
+  color: #aeb8c8;
+
+  border-color: #354154;
+
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.submission-details-page .btn-outline:hover {
+  color: #c8c5ff;
+
+  border-color: rgba(99, 91, 255, 0.55);
+
+  background: rgba(99, 91, 255, 0.07);
+}
+
+.submission-details-page .btn-primary {
+  color: white;
+
+  border-color: transparent;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6962ff,
+      #5148e8
+    );
+
+  box-shadow:
+    0 8px 25px rgba(81, 72, 232, 0.18);
+}
+
+.submission-details-page .btn-primary:hover {
+  box-shadow:
+    0 12px 30px rgba(81, 72, 232, 0.30);
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.submission-details-page > div:nth-child(2) {
+  padding: 14px 2px 8px;
+}
+
+.submission-details-page > div:nth-child(2) h1 {
+  margin: 0;
+
+  font-size: 30px;
+
+  font-weight: 780;
+
+  letter-spacing: -0.035em;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff,
+      #c9c7ff
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+.submission-details-page > div:nth-child(2) p {
+  color: #7f8b9e;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.submission-details-page > .card {
+  overflow: hidden;
+
+  border: 1px solid var(--submission-border);
+
+  border-radius: 17px;
+
+  background:
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(99, 91, 255, 0.065),
+      transparent 27%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(20, 27, 39, 0.98),
+      rgba(13, 18, 27, 0.98)
+    );
+
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.015);
+}
+
+.submission-details-page > .card .card-body {
+  padding: 28px;
+}
+
+
+/* =========================================================
+   PROBLEM HEADER
+========================================================= */
+
+.submission-details-page .card h2 {
+  margin: 0;
+
+  color: #f1f3f7;
+
+  font-size: 23px;
+
+  font-weight: 760;
+
+  letter-spacing: -0.025em;
+}
+
+.submission-details-page .card h2 + .text-success {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 9px;
+
+  border-radius: 7px;
+
+  background: rgba(34, 197, 94, 0.08);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+.submission-details-page .card h2 ~ div .text-base-content\/60 {
+  color: #8894a7;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   DIFFICULTY
+========================================================= */
+
+.submission-details-page .badge {
+  border-radius: 7px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+.submission-details-page .badge-success {
+  color: #55df80;
+
+  background: rgba(34, 197, 94, 0.10);
+
+  border-color: rgba(34, 197, 94, 0.24);
+}
+
+.submission-details-page .badge-warning {
+  color: #ffc15c;
+
+  background: rgba(245, 158, 11, 0.10);
+
+  border-color: rgba(245, 158, 11, 0.24);
+}
+
+.submission-details-page .badge-error {
+  color: #ff7b7b;
+
+  background: rgba(239, 68, 68, 0.10);
+
+  border-color: rgba(239, 68, 68, 0.24);
+}
+
+.submission-details-page .badge-outline {
+  color: #9ba6b7;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border-color: #354154;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.submission-details-page .text-lg.font-bold {
+  min-width: 145px;
+
+  padding: 11px 15px;
+
+  text-align: center;
+
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  font-size: 15px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.submission-details-page .text-success {
+  color: #55df80;
+}
+
+.submission-details-page .text-error {
+  color: #ff7373;
+}
+
+.submission-details-page .text-warning {
+  color: #ffc15c;
+}
+
+.submission-details-page .text-info {
+  color: #65b8ff;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.submission-details-page .grid.grid-cols-2 {
+  margin-top: 26px;
+}
+
+.submission-details-page .grid.grid-cols-2 > div {
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: 92px;
+
+  padding: 17px;
+
+  border: 1px solid #293445;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #171f2b,
+      #121923
+    );
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.submission-details-page .grid.grid-cols-2 > div::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 2px;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      180deg,
+      #6962ff,
+      transparent
+    );
+
+  opacity: 0.75;
+}
+
+.submission-details-page .grid.grid-cols-2 > div:hover {
+  transform: translateY(-2px);
+
+  border-color: #374357;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.16);
+}
+
+.submission-details-page .grid.grid-cols-2 > div .text-sm {
+  color: #778498;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+}
+
+.submission-details-page .grid.grid-cols-2 > div .text-lg {
+  color: #edf0f5;
+
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.submission-details-page .card .mt-6 > .text-sm {
+  color: #768397;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+
+  text-transform: uppercase;
+}
+
+.submission-details-page .card .mt-6 > .font-medium {
+  color: #c7ced9;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   ERROR PANEL
+========================================================= */
+
+.submission-details-page .bg-error\/10 {
+  margin-top: 10px;
+
+  background: rgba(239, 68, 68, 0.055);
+
+  border: 1px solid rgba(239, 68, 68, 0.20);
+
+  color: #ff8787;
+
+  border-radius: 10px;
+
+  font-family:
+    "JetBrains Mono",
+    "Fira Code",
+    Consolas,
+    monospace;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.01);
+}
+
+
+/* =========================================================
+   CODE SECTION
+========================================================= */
+
+.submission-details-page h3 {
+  color: #e9edf3;
+
+  font-size: 17px;
+
+  font-weight: 730;
+}
+
+
+/* Copy button */
+
+.submission-details-page .btn-sm {
+  min-height: 32px;
+
+  height: 32px;
+
+  padding: 0 11px;
+
+  font-size: 10px;
+}
+
+
+/* Code window */
+
+.submission-details-page pre.bg-base-300 {
+  position: relative;
+
+  margin-top: 10px;
+
+  padding: 22px;
+
+  max-height: 700px;
+
+  overflow: auto;
+
+  border: 1px solid #293445;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0d131c,
+      #090e15
+    ) !important;
+
+  color: #cbd4e2;
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.22);
+
+  font-family:
+    "JetBrains Mono",
+    "Fira Code",
+    Consolas,
+    monospace;
+
+  font-size: 13px;
+
+  line-height: 1.75;
+}
+
+
+/* Code top accent */
+
+.submission-details-page pre.bg-base-300::before {
+  content: "SUBMITTED CODE";
+
+  position: sticky;
+
+  top: -22px;
+
+  display: block;
+
+  width: max-content;
+
+  margin: -8px 0 14px;
+
+  padding: 4px 8px;
+
+  border-radius: 5px;
+
+  color: #7774ff;
+
+  background: rgba(99, 91, 255, 0.08);
+
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+
+/* Code scrollbar */
+
+.submission-details-page pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.submission-details-page pre::-webkit-scrollbar-track {
+  background: #090e15;
+}
+
+.submission-details-page pre::-webkit-scrollbar-thumb {
+  background: #2d3748;
+
+  border-radius: 99px;
+}
+
+.submission-details-page pre::-webkit-scrollbar-thumb:hover {
+  background: #414d62;
+}
+
+
+/* =========================================================
+   NO CODE
+========================================================= */
+
+.submission-details-page .bg-base-200.rounded-lg.p-6 {
+  border: 1px solid #293445;
+
+  background:
+    rgba(255, 255, 255, 0.018);
+
+  color: #758196;
+}
+
+
+/* =========================================================
+   BOTTOM NAVIGATION
+========================================================= */
+
+.submission-details-page > .flex.justify-between {
+  padding-top: 3px;
+}
+
+.submission-details-page > .flex.justify-between .btn {
+  min-height: 40px;
+
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.submission-details-page .loading-spinner {
+  color: #716bff;
+}
+
+.submission-details-page .min-h-\[60vh\] {
+  min-height: 60vh;
+}
+
+
+/* =========================================================
+   ERROR / NOT FOUND STATES
+========================================================= */
+
+.submission-details-page .card.max-w-lg {
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #151c28,
+      #101620
+    );
+
+  border-color: #2b3546;
+}
+
+.submission-details-page .card.max-w-lg .card-body {
+  padding: 35px;
+}
+
+.submission-details-page .card.max-w-lg .text-5xl {
+  filter:
+    drop-shadow(
+      0 0 12px rgba(250, 204, 21, 0.12)
+    );
+}
+
+
+/* =========================================================
+   PAGE ANIMATION
+========================================================= */
+
+@keyframes submissionFadeIn {
+  from {
+    opacity: 0;
+
+    transform: translateY(7px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .submission-details-page {
+    padding: 22px 20px 55px;
+  }
+
+  .submission-details-page > .card .card-body {
+    padding: 22px;
+  }
+
+  .submission-details-page > div:nth-child(2) h1 {
+    font-size: 27px;
+  }
+}
+
+
+@media (max-width: 640px) {
+  .submission-details-page {
+    padding: 17px 12px 45px;
+  }
+
+  .submission-details-page > .card .card-body {
+    padding: 18px;
+  }
+
+  .submission-details-page > div:nth-child(2) h1 {
+    font-size: 24px;
+  }
+
+  .submission-details-page .card h2 {
+    font-size: 20px;
+  }
+
+  .submission-details-page .text-lg.font-bold {
+    width: 100%;
+  }
+
+  .submission-details-page .grid.grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .submission-details-page pre.bg-base-300 {
+    padding: 16px;
+
+    font-size: 12px;
+  }
+
+  .submission-details-page > .flex.justify-between {
+    flex-direction: column;
+  }
+
+  .submission-details-page > .flex.justify-between .btn {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .submission-details-page {
+    animation: none;
+  }
+
+  .submission-details-page *,
+  .submission-details-page .btn {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,392 @@
+/* ==========================================
+   ADMIN PAGE
+========================================== */
+
+.admin-page {
+    width: 100%;
+    min-height: calc(100vh - 72px);
+    padding: 48px 5vw 80px;
+    box-sizing: border-box;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(91, 76, 255, 0.08),
+            transparent 35%
+        ),
+        #0b111a;
+
+    color: #f5f7ff;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.admin-header {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 36px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.admin-eyebrow {
+    margin-bottom: 10px;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    color: #7165ff;
+}
+
+.admin-header h1 {
+    margin: 0;
+
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1.05;
+
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+.admin-header h1 span {
+    color: #6557ff;
+}
+
+.admin-header p {
+    margin: 12px 0 0;
+
+    font-size: 15px;
+    color: #7f8ca5;
+}
+
+
+/* ==========================================
+   REFRESH BUTTON
+========================================== */
+
+.admin-refresh {
+    flex-shrink: 0;
+
+    padding: 11px 18px;
+
+    border: 1px solid #293750;
+    border-radius: 9px;
+
+    background: #111a27;
+    color: #e8ecf7;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.admin-refresh:hover {
+    background: #172236;
+    border-color: #4d5d7a;
+}
+
+.admin-refresh:active {
+    transform: scale(0.97);
+}
+
+
+/* ==========================================
+   STAT GRID
+========================================== */
+
+.admin-stat-grid {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto 22px;
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* ==========================================
+   STAT CARD
+========================================== */
+
+.admin-stat-card {
+    position: relative;
+
+    min-height: 125px;
+
+    padding: 26px 24px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #26364f;
+    border-radius: 14px;
+
+    background: #101a28;
+
+    overflow: hidden;
+}
+
+.admin-stat-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 3px;
+
+    background: #6557ff;
+}
+
+.admin-stat-label {
+    margin-bottom: 12px;
+
+    font-size: 13px;
+    color: #8a98b2;
+}
+
+.admin-stat-value {
+    font-size: 32px;
+    line-height: 1;
+
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.admin-stat-description {
+    margin-top: 12px;
+
+    font-size: 12px;
+    color: #71819d;
+}
+
+.admin-success {
+    color: #19d982;
+}
+
+
+/* ==========================================
+   OVERVIEW GRID
+========================================== */
+
+.admin-overview-grid {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* ==========================================
+   PANELS
+========================================== */
+
+.admin-panel {
+    border: 1px solid #26364f;
+    border-radius: 14px;
+
+    background: #101a28;
+
+    overflow: hidden;
+}
+
+.admin-panel-header {
+    padding: 25px 26px 18px;
+}
+
+.admin-panel-header h2 {
+    margin: 0;
+
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.admin-panel-header p {
+    margin: 7px 0 0;
+
+    font-size: 13px;
+    color: #71819d;
+}
+
+
+/* ==========================================
+   LIST
+========================================== */
+
+.admin-list {
+    padding: 0 26px 12px;
+}
+
+.admin-list-row {
+    min-height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #202d41;
+
+    font-size: 14px;
+}
+
+.admin-list-row:last-child {
+    border-bottom: none;
+}
+
+.admin-list-row strong {
+    font-size: 15px;
+}
+
+
+/* ==========================================
+   DIFFICULTY COLORS
+========================================== */
+
+.difficulty-easy {
+    color: #19d982;
+    font-weight: 600;
+}
+
+.difficulty-medium {
+    color: #ffb72b;
+    font-weight: 600;
+}
+
+.difficulty-hard {
+    color: #ff5470;
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   SUBMISSION COLORS
+========================================== */
+
+.submission-accepted {
+    color: #19d982;
+}
+
+.submission-wrong {
+    color: #ff5470;
+}
+
+.submission-pending {
+    color: #ffb72b;
+}
+
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.admin-loading {
+    min-height: 60vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #8795ae;
+
+    font-size: 15px;
+}
+
+
+/* ==========================================
+   ERROR
+========================================== */
+
+.admin-error {
+    max-width: 500px;
+
+    margin: 80px auto;
+
+    padding: 28px;
+
+    border: 1px solid #3b2a38;
+    border-radius: 14px;
+
+    background: #151722;
+}
+
+.admin-error h2 {
+    margin: 0 0 10px;
+
+    color: #ff6078;
+}
+
+.admin-error p {
+    margin: 0;
+
+    color: #9aa5b8;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1000px) {
+
+    .admin-stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 650px) {
+
+    .admin-page {
+        padding: 32px 18px 60px;
+    }
+
+    .admin-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-header h1 {
+        font-size: 36px;
+    }
+
+    .admin-stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-stat-card {
+        min-height: 115px;
+    }
+
+}

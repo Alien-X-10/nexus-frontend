@@ -1,0 +1,1558 @@
+/* =========================================================
+   NEXUS — PROBLEM PAGE
+   FULL-WIDTH CODING WORKSPACE
+========================================================= */
+
+.problem-page {
+  --nexus-bg: #0b0f17;
+  --nexus-workspace: #111827;
+  --nexus-workspace-deep: #0e1521;
+  --nexus-panel: #101823;
+  --nexus-panel-light: #151e2c;
+  --nexus-panel-hover: #192335;
+
+  --nexus-border: rgba(148, 163, 184, 0.13);
+  --nexus-border-strong: rgba(148, 163, 184, 0.22);
+
+  --nexus-purple: #635bff;
+  --nexus-purple-light: #817aff;
+  --nexus-purple-dark: #5148e8;
+
+  --nexus-text: #f4f5f7;
+  --nexus-text-secondary: #b2bccb;
+  --nexus-muted: #778397;
+
+  width: 100vw !important;
+  max-width: none !important;
+
+  /*
+    This removes the centered-container limitation
+    coming from MainLayout.
+  */
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+
+  min-height: calc(100vh - 68px);
+
+  padding: 18px 22px 60px;
+
+  color: var(--nexus-text);
+
+  background:
+    radial-gradient(
+      circle at 5% 0%,
+      rgba(99, 91, 255, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 95% 10%,
+      rgba(99, 91, 255, 0.07),
+      transparent 25%
+    ),
+    linear-gradient(
+      180deg,
+      #0d121c 0%,
+      #0b1018 100%
+    );
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   GLOBAL BOX SIZING
+========================================================= */
+
+.problem-page *,
+.problem-page *::before,
+.problem-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BUTTON / INPUT TRANSITIONS
+========================================================= */
+
+.problem-page button,
+.problem-page select,
+.problem-page textarea {
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.problem-page > .flex.items-center.justify-between {
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 0 18px;
+
+  padding: 0 4px 16px;
+
+  border-bottom:
+    1px solid
+    rgba(148, 163, 184, 0.09);
+}
+
+
+/* Back button */
+
+.problem-page
+  > .flex.items-center.justify-between
+  .btn-ghost {
+  color: #9aa5b7;
+}
+
+.problem-page
+  > .flex.items-center.justify-between
+  .btn-ghost:hover {
+  color: #c1bdff;
+
+  background:
+    rgba(99, 91, 255, 0.08);
+
+  transform:
+    translateX(-2px);
+}
+
+
+/* Favorite */
+
+.problem-page
+  > .flex.items-center.justify-between
+  .btn-warning {
+  color: #ffd66b;
+
+  background:
+    rgba(245, 158, 11, 0.08);
+
+  border-color:
+    rgba(245, 158, 11, 0.25);
+
+  box-shadow:
+    0 0 25px
+    rgba(245, 158, 11, 0.07);
+}
+
+
+/* =========================================================
+   MAIN WORKSPACE
+========================================================= */
+
+.problem-page > .grid {
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+
+  display: grid;
+
+  /*
+    LEFT  = 46%
+    RIGHT = 54%
+
+    Editor gets slightly more room.
+  */
+
+  grid-template-columns:
+    minmax(0, 0.92fr)
+    minmax(0, 1.08fr) !important;
+
+  gap: 12px;
+
+  align-items: stretch;
+
+  min-height: 760px;
+
+  padding: 0;
+
+  background: transparent;
+}
+
+
+/* =========================================================
+   MAIN CARDS
+========================================================= */
+
+.problem-page .card {
+  position: relative;
+
+  width: 100%;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17, 27, 42, 0.98),
+      rgba(13, 21, 33, 0.98)
+    );
+
+  border:
+    1px solid
+    var(--nexus-border);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 20px 55px
+    rgba(0, 0, 0, 0.20),
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.018);
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CARD TOP GLOW
+========================================================= */
+
+.problem-page .card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 8%;
+  right: 8%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(99, 91, 255, 0.42),
+      transparent
+    );
+
+  opacity: 0.7;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   LEFT PROBLEM CARD
+========================================================= */
+
+.problem-page
+  .grid
+  > .card:first-child {
+  width: 100%;
+
+  min-height: 760px;
+
+  height: 100%;
+}
+
+.problem-page
+  .grid
+  > .card:first-child
+  > .p-6 {
+  padding: 28px;
+}
+
+
+/* =========================================================
+   RIGHT CODE CARD
+========================================================= */
+
+.problem-page
+  .grid
+  > .card:nth-child(2) {
+  width: 100%;
+
+  min-height: 760px;
+
+  height: 100%;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(15, 24, 38, 0.99),
+      rgba(10, 18, 29, 0.99)
+    );
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.problem-page h1 {
+  font-size: 30px;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.035em;
+
+  font-weight: 800;
+
+  background:
+    linear-gradient(
+      110deg,
+      #ffffff 15%,
+      #dedcff 60%,
+      #8b87ff
+    );
+
+  -webkit-background-clip: text;
+
+  background-clip: text;
+
+  color: transparent;
+}
+
+
+/* =========================================================
+   HEADINGS
+========================================================= */
+
+.problem-page h2 {
+  color: #f4f5f7;
+
+  font-weight: 750;
+
+  letter-spacing: -0.025em;
+}
+
+.problem-page h3 {
+  color: #e9edf4;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.problem-page h1 + p {
+  max-width: 920px;
+
+  margin-top: 14px;
+
+  color: var(--nexus-text-secondary);
+
+  font-size: 15px;
+
+  line-height: 1.85;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.problem-page .badge {
+  border-radius: 7px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.02em;
+
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+/* Easy / success */
+
+.problem-page .badge-success {
+  color: #5ee889;
+
+  background:
+    rgba(34, 197, 94, 0.09);
+
+  border-color:
+    rgba(34, 197, 94, 0.22);
+
+  box-shadow:
+    0 0 16px
+    rgba(34, 197, 94, 0.05);
+}
+
+
+/* Medium */
+
+.problem-page .badge-warning {
+  color: #ffc45c;
+
+  background:
+    rgba(245, 158, 11, 0.09);
+
+  border-color:
+    rgba(245, 158, 11, 0.22);
+}
+
+
+/* Hard */
+
+.problem-page .badge-error {
+  color: #ff7c7c;
+
+  background:
+    rgba(239, 68, 68, 0.09);
+
+  border-color:
+    rgba(239, 68, 68, 0.22);
+}
+
+
+/* =========================================================
+   TAGS
+========================================================= */
+
+.problem-page .badge-outline {
+  color: #8995a8;
+
+  background:
+    rgba(255, 255, 255, 0.018);
+
+  border-color:
+    rgba(148, 163, 184, 0.18);
+}
+
+.problem-page .badge-outline:hover {
+  color: #b4b0ff;
+
+  border-color:
+    rgba(99, 91, 255, 0.42);
+
+  background:
+    rgba(99, 91, 255, 0.07);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   SOLVED LABEL
+========================================================= */
+
+.problem-page
+  .text-success.font-semibold {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 5px 10px;
+
+  border-radius: 7px;
+
+  background:
+    rgba(34, 197, 94, 0.07);
+
+  border:
+    1px solid
+    rgba(34, 197, 94, 0.13);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   CONTENT SECTIONS
+========================================================= */
+
+.problem-page
+  .grid
+  > .card:first-child
+  h2 {
+  margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   CONTENT / EXAMPLE CARDS
+========================================================= */
+
+.problem-page .bg-base-200 {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24, 35, 51, 0.98),
+      rgba(17, 27, 41, 0.98)
+    );
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.09);
+}
+
+.problem-page .bg-base-200:hover {
+  border-color:
+    rgba(99, 91, 255, 0.20);
+}
+
+
+/* =========================================================
+   CODE BLOCKS
+========================================================= */
+
+.problem-page pre {
+  border-radius: 8px;
+
+  font-family:
+    "JetBrains Mono",
+    "Fira Code",
+    Consolas,
+    monospace;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+.problem-page .bg-base-300 {
+  background:
+    linear-gradient(
+      145deg,
+      #0a1019,
+      #0d1520
+    );
+
+  border:
+    1px solid
+    #263347;
+
+  color: #c7d0df;
+}
+
+.problem-page pre::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.problem-page pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.problem-page pre::-webkit-scrollbar-thumb {
+  background: #2b3547;
+
+  border-radius: 99px;
+}
+
+
+/* =========================================================
+   HINTS / SOLUTION
+========================================================= */
+
+.problem-page .collapse {
+  background:
+    linear-gradient(
+      145deg,
+      #121d2b,
+      #0f1825
+    );
+
+  border:
+    1px solid
+    #29384d;
+
+  border-radius: 9px;
+}
+
+.problem-page .collapse:hover {
+  border-color:
+    rgba(99, 91, 255, 0.32);
+}
+
+.problem-page .collapse-title {
+  color: #dce2eb;
+
+  font-weight: 650;
+}
+
+.problem-page .collapse-content {
+  color: #a8b2c2;
+
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.problem-page .btn {
+  min-height: 38px;
+
+  border-radius: 8px;
+
+  font-weight: 650;
+
+  letter-spacing: -0.005em;
+}
+
+
+/* Primary */
+
+.problem-page .btn-primary {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #665fff,
+      #5148e8
+    );
+
+  border:
+    1px solid
+    rgba(151, 147, 255, 0.2);
+
+  box-shadow:
+    0 8px 24px
+    rgba(81, 72, 232, 0.18);
+}
+
+.problem-page .btn-primary:hover {
+  transform:
+    translateY(-1px);
+
+  filter:
+    brightness(1.08);
+
+  box-shadow:
+    0 12px 30px
+    rgba(81, 72, 232, 0.28);
+}
+
+
+/* Outline */
+
+.problem-page .btn-outline {
+  color: #aeb8c8;
+
+  background:
+    rgba(255, 255, 255, 0.018);
+
+  border-color:
+    #344054;
+}
+
+.problem-page .btn-outline:hover {
+  color: #c8c5ff;
+
+  background:
+    rgba(99, 91, 255, 0.07);
+
+  border-color:
+    rgba(99, 91, 255, 0.5);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* Ghost */
+
+.problem-page .btn-ghost {
+  color: #8e99aa;
+}
+
+.problem-page .btn-ghost:hover {
+  color: #d3d8e1;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+}
+
+
+/* =========================================================
+   CODE EDITOR PANEL
+========================================================= */
+
+.problem-page .lg\:sticky {
+  top: 86px;
+
+  position: sticky;
+
+  min-height: 760px;
+}
+
+.problem-page
+  .lg\:sticky
+  > .p-6 {
+  padding: 22px;
+
+  min-height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   EDITOR HEADER
+========================================================= */
+
+.problem-page
+  .lg\:sticky
+  h2 {
+  font-size: 18px;
+
+  font-weight: 750;
+}
+
+.problem-page
+  .lg\:sticky
+  .text-xs {
+  color: #7f8b9d;
+}
+
+
+/* =========================================================
+   LANGUAGE SELECT
+========================================================= */
+
+.problem-page .select {
+  min-height: 40px;
+
+  color: #cbd4e2;
+
+  background:
+    linear-gradient(
+      145deg,
+      #111c2a,
+      #0d1723
+    );
+
+  border-color:
+    #303f54;
+
+  border-radius: 8px;
+}
+
+.problem-page .select:hover {
+  border-color:
+    #4b5970;
+}
+
+.problem-page .select:focus {
+  outline: none;
+
+  border-color:
+    var(--nexus-purple);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(99, 91, 255, 0.10);
+}
+
+
+/* =========================================================
+   MONACO / CODE EDITOR
+========================================================= */
+
+.problem-page
+  .overflow-hidden.border {
+  flex: 1;
+
+  min-height: 520px;
+
+  height: 520px;
+
+  border-color:
+    #29394e !important;
+
+  border-radius: 11px;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.30);
+
+  background:
+    #0c1521 !important;
+}
+
+.problem-page
+  .overflow-hidden.border
+  > div {
+  min-height: 100%;
+}
+
+
+/* =========================================================
+   EDITOR SETTINGS POPUP
+========================================================= */
+
+.problem-page .absolute.right-0 {
+  background:
+    linear-gradient(
+      145deg,
+      #172233,
+      #101a27
+    ) !important;
+
+  border-color:
+    #303f54 !important;
+
+  border-radius: 11px;
+
+  box-shadow:
+    0 25px 55px
+    rgba(0, 0, 0, 0.45) !important;
+
+  backdrop-filter:
+    blur(16px);
+}
+
+
+/* =========================================================
+   DRAFT NOTICE
+========================================================= */
+
+.problem-page .alert-info {
+  color: #a9cbff;
+
+  background:
+    rgba(59, 130, 246, 0.07);
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.20);
+
+  border-radius: 9px;
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.problem-page .textarea {
+  color: #e5e9f0;
+
+  background:
+    #0c1521;
+
+  border-color:
+    #303f54;
+
+  border-radius: 9px;
+
+  font-family:
+    "JetBrains Mono",
+    "Fira Code",
+    Consolas,
+    monospace;
+
+  line-height: 1.65;
+
+  resize: vertical;
+}
+
+.problem-page .textarea::placeholder {
+  color: #5d6a7e;
+}
+
+.problem-page .textarea:focus {
+  outline: none;
+
+  border-color:
+    var(--nexus-purple);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(99, 91, 255, 0.10);
+}
+
+
+/* =========================================================
+   RESULT PANEL
+========================================================= */
+
+.problem-page
+  .border-base-300 {
+  border-color:
+    #29394e;
+}
+
+.problem-page .text-success {
+  color: #55e184;
+}
+
+.problem-page .text-error {
+  color: #ff7373;
+}
+
+.problem-page .text-warning {
+  color: #ffbd5c;
+}
+
+
+/* =========================================================
+   RESULT STATUS
+========================================================= */
+
+.problem-page
+  .text-lg.font-semibold.mt-4 {
+  padding: 11px 14px;
+
+  border-radius: 9px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.045);
+}
+
+
+/* =========================================================
+   RESULT SUMMARY
+========================================================= */
+
+.problem-page
+  .grid.grid-cols-3
+  > div {
+  background:
+    #0d1723 !important;
+
+  border:
+    1px solid
+    #26364b;
+
+  border-radius: 9px;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.problem-page
+  .grid.grid-cols-3
+  > div:hover {
+  border-color:
+    rgba(99, 91, 255, 0.25);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   SUBMISSIONS TABLE
+========================================================= */
+
+.problem-page table {
+  width: 100%;
+
+  border-collapse: separate;
+
+  border-spacing: 0;
+
+  overflow: hidden;
+}
+
+.problem-page table thead {
+  background:
+    #0c1521;
+}
+
+.problem-page table th {
+  padding-top: 13px;
+  padding-bottom: 13px;
+
+  color: #738095;
+
+  font-size: 10px;
+
+  font-weight: 750;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+
+  border-bottom:
+    1px solid
+    #28384c;
+}
+
+.problem-page table td {
+  color: #b7c0cf;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.035);
+}
+
+.problem-page table tbody tr {
+  transition:
+    background 0.18s ease;
+}
+
+.problem-page table tbody tr:hover {
+  background:
+    rgba(99, 91, 255, 0.045);
+}
+
+.problem-page table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   DISCUSSION
+========================================================= */
+
+.problem-page
+  .space-y-4
+  > .border {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 30, 45, 0.98),
+      rgba(14, 22, 34, 0.98)
+    );
+
+  border-color:
+    #29394e !important;
+
+  border-radius: 11px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.problem-page
+  .space-y-4
+  > .border:hover {
+  border-color:
+    rgba(99, 91, 255, 0.30) !important;
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0, 0, 0, 0.20);
+}
+
+
+/* =========================================================
+   DISCUSSION AVATAR
+========================================================= */
+
+.problem-page
+  .avatar
+  .bg-primary {
+  background:
+    linear-gradient(
+      135deg,
+      #635bff,
+      #4941d9
+    ) !important;
+
+  box-shadow:
+    0 0 18px
+    rgba(99, 91, 255, 0.18);
+}
+
+
+/* =========================================================
+   DISCUSSION TEXT
+========================================================= */
+
+.problem-page
+  .text-base-content\/90 {
+  color: #c5ccd8;
+
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   PREVIOUS / NEXT
+========================================================= */
+
+.problem-page
+  > .flex.items-center.justify-between.mt-6 {
+  width: 100% !important;
+  max-width: none !important;
+
+  margin-left: 0;
+  margin-right: 0;
+
+  padding-top: 14px;
+}
+
+
+/* =========================================================
+   SCROLLBARS
+========================================================= */
+
+.problem-page ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.problem-page ::-webkit-scrollbar-track {
+  background:
+    #090f18;
+}
+
+.problem-page ::-webkit-scrollbar-thumb {
+  background:
+    #29394d;
+
+  border-radius: 99px;
+}
+
+.problem-page ::-webkit-scrollbar-thumb:hover {
+  background:
+    #3a4a61;
+}
+
+
+/* =========================================================
+   FULLSCREEN EDITOR
+========================================================= */
+
+.problem-page
+  .w-screen.h-screen {
+  background:
+    #0b1420 !important;
+}
+
+.problem-page
+  .w-screen.h-screen
+  > .p-6 {
+  height: 100%;
+}
+
+
+/* =========================================================
+   ENTRY ANIMATION
+========================================================= */
+
+@keyframes nexusProblemEnter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+.problem-page > .grid {
+  animation:
+    nexusProblemEnter
+    0.35s
+    ease
+    both;
+}
+
+
+/* =========================================================
+   FOCUS STATES
+========================================================= */
+
+.problem-page
+  button:focus-visible,
+.problem-page
+  select:focus-visible,
+.problem-page
+  textarea:focus-visible {
+  outline:
+    2px solid
+    rgba(99, 91, 255, 0.65);
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+  .problem-page {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .problem-page > .grid {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr) !important;
+
+    min-height: 680px;
+
+    gap: 12px;
+  }
+
+  .problem-page
+    .grid
+    > .card:first-child
+    > .p-6,
+  .problem-page
+    .lg\:sticky
+    > .p-6 {
+    padding: 22px;
+  }
+
+  .problem-page
+    .grid
+    > .card:first-child,
+  .problem-page
+    .grid
+    > .card:nth-child(2),
+  .problem-page
+    .lg\:sticky {
+    min-height: 680px;
+  }
+
+  .problem-page
+    .overflow-hidden.border {
+    min-height: 450px;
+
+    height: 450px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  .problem-page {
+    width: 100vw !important;
+
+    margin-left:
+      calc(50% - 50vw) !important;
+
+    margin-right:
+      calc(50% - 50vw) !important;
+
+    padding:
+      14px
+      10px
+      45px;
+  }
+
+  .problem-page h1 {
+    font-size: 25px;
+  }
+
+  .problem-page .card {
+    border-radius: 12px;
+  }
+
+  .problem-page > .grid {
+    grid-template-columns: 1fr !important;
+
+    min-height: auto;
+
+    gap: 14px;
+
+    padding: 0;
+  }
+
+  .problem-page
+    .grid
+    > .card:first-child,
+  .problem-page
+    .grid
+    > .card:nth-child(2),
+  .problem-page
+    .lg\:sticky {
+    min-height: auto;
+
+    height: auto;
+  }
+
+  .problem-page
+    .grid
+    > .card:first-child
+    > .p-6,
+  .problem-page
+    .lg\:sticky
+    > .p-6 {
+    padding: 18px;
+  }
+
+  .problem-page
+    .overflow-hidden.border {
+    min-height: 420px;
+
+    height: 420px;
+
+    flex: none;
+  }
+
+  .problem-page table {
+    min-width: 800px;
+  }
+
+  .problem-page
+    > .flex.items-center.justify-between.mt-6 {
+    padding:
+      0
+      4px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+  .problem-page .btn {
+    font-size: 12px;
+  }
+
+  .problem-page
+    .grid.grid-cols-3 {
+    grid-template-columns:
+      1fr;
+  }
+
+  .problem-page
+    .flex.flex-wrap.gap-3 {
+    gap: 8px;
+  }
+
+  .problem-page
+    .overflow-hidden.border {
+    min-height: 360px;
+
+    height: 360px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .problem-page *,
+  .problem-page *::before,
+  .problem-page *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}
+
+
+
+
+
+/* =========================================================
+   REMOVE GAP BELOW NEXUS NAVBAR
+========================================================= */
+
+.problem-page {
+  /*
+    Pull the problem workspace upward so its background
+    starts immediately below the navbar.
+  */
+  margin-top: -27px !important;
+
+  /*
+    Add the same amount back as internal padding so
+    the actual problem content stays in the same position.
+  */
+  padding-top: 45px !important;
+}
+
+
+
+/* =========================================================
+   LANGUAGE SELECT — KEEP ABOVE MONACO
+   ========================================================= */
+
+.problem-page .lg\:sticky .select {
+  position: relative;
+  z-index: 50;
+
+  flex: 0 0 auto;
+
+  height: 40px !important;
+  min-height: 40px !important;
+
+  width: 100%;
+
+  margin-bottom: 12px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+/* Native options must never become part of the layout */
+.problem-page .lg\:sticky .select option {
+  position: static !important;
+
+  display: block;
+
+  height: auto;
+
+  min-height: 0;
+
+  overflow: visible;
+}
+
+/* Monaco stays underneath the selector */
+.problem-page .lg\:sticky
+  .overflow-hidden.border {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+
+
+
+
+/* =========================================================
+   LANGUAGE DROPDOWN
+   ========================================================= */
+
+.language-dropdown {
+  position: relative;
+  width: 100%;
+  margin-bottom: 12px;
+  z-index: 100;
+}
+
+/* Selected language */
+.language-dropdown-button {
+  width: 100%;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 14px;
+
+  background: #111c2d;
+  color: #e5e7eb;
+
+  border: 1px solid #34445c;
+  border-radius: 10px;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.language-dropdown-button:hover {
+  border-color: #6366f1;
+  background: #142033;
+}
+
+.language-arrow {
+  font-size: 16px;
+  color: #94a3b8;
+
+  transition: transform 0.2s ease;
+}
+
+.language-arrow.open {
+  transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   DROPDOWN MENU
+   ========================================================= */
+
+.language-dropdown-menu {
+  position: absolute;
+
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+
+  background: #111c2d;
+
+  border: 1px solid #34445c;
+  border-radius: 10px;
+
+  padding: 5px;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.45),
+    0 4px 10px rgba(0, 0, 0, 0.25);
+
+  z-index: 1000;
+}
+
+
+/* =========================================================
+   DROPDOWN OPTIONS
+   ========================================================= */
+
+.language-dropdown-menu button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  padding: 11px 12px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: transparent;
+  color: #cbd5e1;
+
+  font-size: 14px;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.language-dropdown-menu button:hover {
+  background: #1e293b;
+  color: #ffffff;
+}
+
+.language-dropdown-menu button.active {
+  background: #252b61;
+  color: #818cf8;
+  font-weight: 600;
+}

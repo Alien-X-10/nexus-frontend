@@ -1,0 +1,433 @@
+.admin-submission-details-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.admin-submission-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.admin-submission-details-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.admin-submission-details-header h1 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.admin-submission-details-header h1 span {
+    color: #3b82f6;
+}
+
+.admin-submission-details-header p {
+    margin-top: 10px;
+    color: #64748b;
+}
+
+.admin-submission-back {
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: #334155;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.admin-submission-back:hover {
+    background: #f8fafc;
+}
+
+
+/* =====================================================
+   ID
+===================================================== */
+
+.admin-submission-id-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 18px 22px;
+
+    margin-bottom: 20px;
+}
+
+.admin-submission-id-card span {
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.admin-submission-id-card code {
+    color: #475569;
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   DETAIL GRID
+===================================================== */
+
+.admin-submission-detail-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.admin-detail-card {
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 22px;
+}
+
+.admin-detail-label {
+    color: #64748b;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 10px;
+}
+
+.admin-detail-value {
+    color: #0f172a;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+.admin-detail-secondary {
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    margin-top: 5px;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.admin-detail-status {
+    display: inline-flex;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.detail-status-accepted {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.detail-status-pending {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.detail-status-error {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+
+/* =====================================================
+   PERFORMANCE
+===================================================== */
+
+.admin-performance-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.admin-performance-card {
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 20px;
+}
+
+.admin-performance-card span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 8px;
+}
+
+.admin-performance-card strong {
+    color: #0f172a;
+
+    font-size: 20px;
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.admin-error-card {
+    background: #fff7f7;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 12px;
+
+    padding: 22px;
+
+    margin-bottom: 20px;
+}
+
+.admin-error-card pre {
+    margin: 12px 0 0;
+
+    white-space: pre-wrap;
+
+    color: #991b1b;
+
+    font-size: 13px;
+
+    font-family:
+        "JetBrains Mono",
+        "Fira Code",
+        monospace;
+}
+
+
+/* =====================================================
+   CODE
+===================================================== */
+
+.admin-code-card {
+    background: #0f172a;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    margin-bottom: 20px;
+}
+
+.admin-code-header {
+    padding: 18px 22px;
+
+    border-bottom: 1px solid #334155;
+
+    display: flex;
+
+    justify-content: space-between;
+}
+
+.admin-code-section-title {
+    color: #94a3b8;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.admin-code-language {
+    color: #cbd5e1;
+
+    font-size: 12px;
+
+    margin-top: 5px;
+}
+
+.admin-submitted-code {
+    margin: 0;
+
+    padding: 25px;
+
+    overflow-x: auto;
+
+    color: #e2e8f0;
+
+    font-family:
+        "JetBrains Mono",
+        "Fira Code",
+        Consolas,
+        monospace;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    white-space: pre;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.admin-submission-details-footer {
+    padding: 5px 0 30px;
+}
+
+.admin-submission-back-link {
+    color: #475569;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.admin-submission-back-link:hover {
+    color: #2563eb;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.admin-submission-details-loading {
+    padding: 100px 20px;
+
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   ERROR PAGE
+===================================================== */
+
+.admin-submission-details-error {
+    padding: 80px 20px;
+
+    text-align: center;
+}
+
+.admin-submission-details-error h2 {
+    color: #dc2626;
+
+    margin-bottom: 10px;
+}
+
+.admin-submission-details-error p {
+    color: #64748b;
+
+    margin-bottom: 20px;
+}
+
+.admin-submission-details-error button {
+    border: none;
+
+    background: #0f172a;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .admin-submission-details-page {
+        padding: 24px;
+    }
+
+    .admin-submission-detail-grid,
+    .admin-performance-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .admin-submission-details-header {
+        flex-direction: column;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .admin-submission-detail-grid,
+    .admin-performance-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-submission-id-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}

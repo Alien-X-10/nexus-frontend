@@ -1,0 +1,590 @@
+/* =========================================================
+   NEXUS GLOBAL STYLES
+========================================================= */
+
+:root {
+  --nexus-bg: #0b0f17;
+  --nexus-bg-soft: #0e131c;
+
+  --nexus-panel: #111722;
+  --nexus-panel-light: #151c28;
+
+  --nexus-border: #273142;
+  --nexus-border-light: #303b4d;
+
+  --nexus-primary: #635bff;
+  --nexus-primary-light: #817aff;
+  --nexus-primary-dark: #5148e8;
+
+  --nexus-text: #f3f5f8;
+  --nexus-text-soft: #c5ccd8;
+  --nexus-muted: #8995a8;
+  --nexus-muted-dark: #687589;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: var(--nexus-text);
+
+  background: var(--nexus-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+
+html {
+  min-width: 320px;
+
+  background: var(--nexus-bg);
+
+  scroll-behavior: smooth;
+}
+
+
+body {
+  margin: 0;
+
+  min-width: 320px;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      rgba(99, 91, 255, 0.035),
+      transparent 28%
+    ),
+    var(--nexus-bg);
+
+  color: var(--nexus-text);
+
+  overflow-x: hidden;
+}
+
+
+#root {
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+  color: #ffffff;
+
+  background: rgba(99, 91, 255, 0.45);
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+a {
+  color: inherit;
+
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button {
+  font-family: inherit;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+:focus-visible {
+  outline: 2px solid rgba(99, 91, 255, 0.65);
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #090d14;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #293446;
+
+  border-radius: 999px;
+
+  border: 2px solid #090d14;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a465a;
+}
+
+
+/* Firefox */
+
+* {
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    #293446
+    #090d14;
+}
+
+
+/* =========================================================
+   GLOBAL PAGE CONTAINER
+========================================================= */
+
+.page-container {
+  width: 100%;
+
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+
+/* =========================================================
+   GLOBAL CARD
+========================================================= */
+
+.nexus-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(19, 26, 38, 0.98),
+      rgba(13, 18, 27, 0.98)
+    );
+
+  border: 1px solid var(--nexus-border);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.015);
+}
+
+
+/* =========================================================
+   GLOBAL PURPLE BUTTON
+========================================================= */
+
+.nexus-btn-primary {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 42px;
+
+  padding:
+    0 16px;
+
+  border: 1px solid
+    rgba(151, 147, 255, 0.25);
+
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--nexus-primary-light),
+      var(--nexus-primary-dark)
+    );
+
+  box-shadow:
+    0 8px 22px
+    rgba(81, 72, 232, 0.17);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+
+.nexus-btn-primary:hover {
+  color: #ffffff;
+
+  transform: translateY(-1px);
+
+  filter: brightness(1.07);
+
+  box-shadow:
+    0 12px 28px
+    rgba(81, 72, 232, 0.28);
+}
+
+
+/* =========================================================
+   GLOBAL SECONDARY BUTTON
+========================================================= */
+
+.nexus-btn-secondary {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding:
+    0 16px;
+
+  border: 1px solid var(--nexus-border-light);
+
+  border-radius: 8px;
+
+  color: #aeb8c7;
+
+  background:
+    rgba(255, 255, 255, 0.015);
+
+  font-size: 12px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.nexus-btn-secondary:hover {
+  color: #d1ceff;
+
+  border-color:
+    rgba(99, 91, 255, 0.45);
+
+  background:
+    rgba(99, 91, 255, 0.07);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   GLOBAL INPUT
+========================================================= */
+
+.nexus-input {
+  width: 100%;
+
+  height: 44px;
+
+  padding:
+    0 13px;
+
+  border: 1px solid var(--nexus-border-light);
+
+  border-radius: 8px;
+
+  outline: none;
+
+  color: #dce1e9;
+
+  background: #0d131c;
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.nexus-input::placeholder {
+  color: #5f6b7d;
+}
+
+
+.nexus-input:focus {
+  border-color: var(--nexus-primary);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(99, 91, 255, 0.09);
+}
+
+
+/* =========================================================
+   GLOBAL BADGES
+========================================================= */
+
+.nexus-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 24px;
+
+  padding:
+    0 8px;
+
+  border-radius: 6px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.01em;
+}
+
+
+.nexus-badge-success {
+  color: #55df80;
+
+  background:
+    rgba(34, 197, 94, 0.10);
+
+  border: 1px solid
+    rgba(34, 197, 94, 0.22);
+}
+
+
+.nexus-badge-warning {
+  color: #ffc15c;
+
+  background:
+    rgba(245, 158, 11, 0.10);
+
+  border: 1px solid
+    rgba(245, 158, 11, 0.22);
+}
+
+
+.nexus-badge-error {
+  color: #ff7b7b;
+
+  background:
+    rgba(239, 68, 68, 0.10);
+
+  border: 1px solid
+    rgba(239, 68, 68, 0.22);
+}
+
+
+/* =========================================================
+   GLOBAL SECTION TITLE
+========================================================= */
+
+.nexus-section-label {
+  color: #7774ff;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.6px;
+
+  text-transform: uppercase;
+}
+
+
+.nexus-section-title {
+  margin: 7px 0 0;
+
+  color: #edf0f5;
+
+  font-size: 26px;
+
+  font-weight: 720;
+
+  letter-spacing: -0.7px;
+}
+
+
+/* =========================================================
+   CODE FONT
+========================================================= */
+
+code,
+pre,
+.code-font {
+  font-family:
+    "JetBrains Mono",
+    "Fira Code",
+    Consolas,
+    "Courier New",
+    monospace;
+}
+
+
+/* =========================================================
+   MONACO / CODE EDITOR
+========================================================= */
+
+.monaco-editor,
+.monaco-editor-background {
+  border-radius: 9px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.nexus-loading {
+  min-height: 50vh;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--nexus-muted);
+}
+
+
+.nexus-loading-dot {
+  width: 7px;
+  height: 7px;
+
+  margin-right: 7px;
+
+  border-radius: 50%;
+
+  background: var(--nexus-primary);
+
+  box-shadow:
+    0 0 12px
+    rgba(99, 91, 255, 0.65);
+
+  animation:
+    nexusLoadingPulse 1.2s ease-in-out infinite;
+}
+
+
+@keyframes nexusLoadingPulse {
+  0%,
+  100% {
+    opacity: 0.4;
+
+    transform: scale(0.85);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform: scale(1.1);
+  }
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.nexus-divider {
+  width: 100%;
+
+  height: 1px;
+
+  background:
+    rgba(148, 163, 184, 0.09);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .page-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+
+@media (max-width: 640px) {
+  .page-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .nexus-section-title {
+    font-size: 22px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

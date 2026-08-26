@@ -1,0 +1,1099 @@
+
+/* =========================================================
+   NEXUS PROFILE
+   CSS ONLY — Profile.jsx is NOT changed.
+   Visual language matches the NEXUS Problem page.
+   ========================================================= */
+
+:root {
+  --profile-bg: #0b1018;
+  --profile-page: #101720;
+  --profile-panel: #101a29;
+  --profile-panel-2: #0d1725;
+  --profile-border: #263752;
+  --profile-border-soft: rgba(148, 163, 184, 0.11);
+  --profile-text: #edf1f8;
+  --profile-muted: #8290a5;
+  --profile-purple: #635bff;
+  --profile-purple-2: #5148e8;
+  --profile-green: #22d878;
+  --profile-yellow: #f5b72e;
+  --profile-red: #ff5c68;
+}
+
+/* =========================================================
+   PAGE
+   The Problem page uses the available browser width.
+   Break out of any narrower MainLayout content wrapper.
+   ========================================================= */
+
+.profile-page {
+  width: 100vw !important;
+  max-width: none !important;
+
+  margin-left: 50% !important;
+  margin-right: 0 !important;
+  transform: translateX(-50%);
+
+  box-sizing: border-box;
+
+  min-height: calc(100vh - 68px);
+
+  padding: 22px 17px 56px !important;
+
+  display: grid !important;
+
+  /*
+    Outer page layout is intentionally TWO columns.
+    Full-width sections span both columns.
+    The final row is therefore:
+      Solved Problems | Recent Submissions
+  */
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  grid-template-areas:
+    "header header"
+    "stats stats"
+    "middle middle"
+    "activity activity"
+    "favorites favorites"
+    "solved recent";
+
+  gap: 16px !important;
+  align-items: start;
+
+  color: var(--profile-text);
+
+  background:
+    radial-gradient(
+      circle at 5% 0%,
+      rgba(99, 91, 255, 0.075),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 96% 70%,
+      rgba(124, 58, 237, 0.045),
+      transparent 28%
+    ),
+    #0f151d !important;
+}
+
+/* Prevent children from creating horizontal overflow */
+.profile-page > * {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   ALL CARDS
+   ========================================================= */
+
+.profile-page .card {
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16, 26, 41, 0.99),
+      rgba(11, 20, 33, 0.99)
+    ) !important;
+
+  border: 1px solid var(--profile-border) !important;
+  border-radius: 14px !important;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.015) !important;
+
+  overflow: hidden;
+
+  color: var(--profile-text);
+
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.profile-page .card:hover {
+  border-color: #304565 !important;
+}
+
+/* =========================================================
+   DIRECT CHILD LAYOUT
+   Existing Profile.jsx order:
+   1 header
+   2 stats
+   3 progress/statistics
+   4 favorites
+   5 solved
+   6 submissions
+   7 activity
+   ========================================================= */
+
+.profile-page > .card:nth-child(1) {
+  grid-area: header;
+}
+
+.profile-page > .grid.grid-cols-2.md\:grid-cols-4 {
+  grid-area: stats;
+}
+
+.profile-page > .grid.grid-cols-1.lg\:grid-cols-2 {
+  grid-area: middle;
+}
+
+.profile-page > .card:nth-child(4) {
+  grid-area: favorites;
+}
+
+.profile-page > .card:nth-child(5) {
+  grid-area: solved;
+}
+
+.profile-page > .card:nth-child(6) {
+  grid-area: recent;
+}
+
+.profile-page > .card:nth-child(7) {
+  grid-area: activity;
+}
+
+/*
+  FINAL SECTION ORDER — matching the requested UX:
+
+  1. Submission Activity — full width
+  2. Favorite Problems — full width
+  3. Solved Problems + Recent Submissions — two columns
+
+  Grid placement is done only with CSS. Profile.jsx remains unchanged.
+*/
+
+/* =========================================================
+   PROFILE HEADER
+   ========================================================= */
+
+.profile-page > .card:nth-child(1) {
+  min-height: 150px;
+
+  background:
+    radial-gradient(
+      circle at 84% 50%,
+      rgba(99, 91, 255, 0.13),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #111a2b,
+      #0d1624
+    ) !important;
+}
+
+.profile-page > .card:nth-child(1) .p-6 {
+  padding: 26px 28px !important;
+}
+
+.profile-page > .card:nth-child(1)
+  .flex.flex-col.md\:flex-row {
+  min-height: 96px;
+}
+
+/* Avatar */
+.profile-page .avatar > div {
+  width: 84px !important;
+  height: 84px !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      #675cff,
+      #5147ea
+    ) !important;
+
+  color: #fff !important;
+
+  border: 2px solid rgba(130, 122, 255, 0.68) !important;
+
+  box-shadow:
+    0 0 0 5px rgba(99, 91, 255, 0.07),
+    0 10px 28px rgba(81, 72, 232, 0.22);
+}
+
+/* Name */
+.profile-page h1 {
+  margin: 0 !important;
+
+  color: #f5f6fb !important;
+
+  font-size: 31px !important;
+  line-height: 1.1 !important;
+
+  font-weight: 800 !important;
+
+  letter-spacing: -0.8px;
+}
+
+/* Email */
+.profile-page h1 + p {
+  color: #8794a8 !important;
+  font-size: 13px !important;
+}
+
+/* Role */
+.profile-page .badge-outline {
+  background: rgba(255, 255, 255, 0.018) !important;
+  border-color: #35445d !important;
+  color: #b7c0cf !important;
+}
+
+/* Header muted text */
+.profile-page .text-base-content\/60 {
+  color: #8491a5 !important;
+}
+
+/* Refresh */
+.profile-page > .card:nth-child(1) .btn-outline {
+  height: 42px !important;
+  min-height: 42px !important;
+
+  padding: 0 17px !important;
+
+  border-radius: 9px !important;
+
+  border: 1px solid #34445f !important;
+
+  background: rgba(12, 21, 35, 0.60) !important;
+
+  color: #c2cad7 !important;
+
+  box-shadow: none !important;
+}
+
+.profile-page > .card:nth-child(1) .btn-outline:hover {
+  color: #fff !important;
+
+  border-color: rgba(108, 103, 255, 0.55) !important;
+
+  background: rgba(99, 91, 255, 0.08) !important;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   FOUR STAT CARDS
+   ========================================================= */
+
+.profile-page > .grid.grid-cols-2.md\:grid-cols-4 {
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr)) !important;
+
+  gap: 16px !important;
+
+  min-width: 0;
+}
+
+.profile-page > .grid.grid-cols-2.md\:grid-cols-4 > .card {
+  min-width: 0;
+
+  min-height: 118px;
+
+  border-radius: 14px !important;
+
+  overflow: hidden;
+}
+
+/* Purple vertical accent */
+.profile-page > .grid.grid-cols-2.md\:grid-cols-4 > .card::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 3px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #6d63ff,
+      #4e45e8
+    );
+
+  box-shadow:
+    0 0 14px rgba(99, 91, 255, 0.20);
+}
+
+.profile-page > .grid.grid-cols-2.md\:grid-cols-4 .p-5 {
+  padding: 23px 22px 21px 25px !important;
+}
+
+.profile-page > .grid.grid-cols-2.md\:grid-cols-4 .text-sm {
+  color: #8793a7 !important;
+
+  font-size: 12px !important;
+}
+
+.profile-page > .grid.grid-cols-2.md\:grid-cols-4 .text-3xl {
+  margin-top: 12px !important;
+
+  color: #f0f3f8 !important;
+
+  font-size: 31px !important;
+  line-height: 1 !important;
+
+  font-weight: 800 !important;
+}
+
+.profile-page > .grid.grid-cols-2.md\:grid-cols-4 .text-success {
+  color: var(--profile-green) !important;
+}
+
+/* =========================================================
+   PROBLEM PROGRESS + PROBLEM STATISTICS
+   ========================================================= */
+
+.profile-page > .grid.grid-cols-1.lg\:grid-cols-2 {
+  display: grid !important;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr) !important;
+
+  gap: 16px !important;
+
+  min-width: 0;
+}
+
+.profile-page > .grid.grid-cols-1.lg\:grid-cols-2 > .card {
+  min-width: 0;
+  min-height: 320px;
+
+  border-radius: 14px !important;
+}
+
+.profile-page > .grid.grid-cols-1.lg\:grid-cols-2 > .card .p-6 {
+  padding: 25px 27px !important;
+}
+
+.profile-page h2 {
+  color: #edf1f7 !important;
+
+  font-size: 19px !important;
+
+  line-height: 1.2 !important;
+
+  font-weight: 750 !important;
+
+  letter-spacing: -0.25px;
+}
+
+.profile-page h2 + p,
+.profile-page h2 ~ p {
+  color: #8491a5 !important;
+}
+
+/* Percentage */
+.profile-page > .grid.grid-cols-1.lg\:grid-cols-2 .text-2xl {
+  color: #f2f4fa !important;
+
+  font-size: 27px !important;
+
+  font-weight: 800 !important;
+}
+
+/* =========================================================
+   PROGRESS BARS
+   ========================================================= */
+
+.profile-page progress {
+  width: 100%;
+
+  height: 8px !important;
+
+  border: 0 !important;
+
+  border-radius: 999px !important;
+
+  overflow: hidden;
+
+  background: #202c41 !important;
+}
+
+.profile-page progress::-webkit-progress-bar {
+  background: #202c41 !important;
+  border-radius: 999px;
+}
+
+.profile-page progress::-webkit-progress-value {
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #5a4df0,
+      #8178ff
+    ) !important;
+}
+
+.profile-page progress.progress-success::-webkit-progress-value {
+  background: var(--profile-green) !important;
+}
+
+.profile-page progress.progress-warning::-webkit-progress-value {
+  background: var(--profile-yellow) !important;
+}
+
+.profile-page progress.progress-error::-webkit-progress-value {
+  background: var(--profile-red) !important;
+}
+
+.profile-page progress::-moz-progress-bar {
+  border-radius: 999px;
+
+  background: #635bff !important;
+}
+
+/* Difficulty mini cards */
+.profile-page .bg-base-200 {
+  background:
+    linear-gradient(
+      145deg,
+      #121d2c,
+      #0f1826
+    ) !important;
+
+  border: 1px solid #263751 !important;
+
+  border-radius: 10px !important;
+}
+
+.profile-page .bg-base-200:hover {
+  border-color: #35496a !important;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   BOTTOM DASHBOARD
+   Favorite | Recent | Activity
+   ========================================================= */
+
+.profile-page > .card:nth-child(4),
+.profile-page > .card:nth-child(6),
+.profile-page > .card:nth-child(7) {
+  min-width: 0;
+
+  min-height: 300px;
+
+  border-radius: 14px !important;
+}
+
+/* Bottom card padding */
+.profile-page > .card:nth-child(4) .p-6,
+.profile-page > .card:nth-child(6) .p-6,
+.profile-page > .card:nth-child(7) .p-6 {
+  padding: 22px !important;
+}
+
+/* Bottom headings */
+.profile-page > .card:nth-child(4) h2,
+.profile-page > .card:nth-child(6) h2,
+.profile-page > .card:nth-child(7) h2 {
+  color: #edf1f7 !important;
+
+  font-size: 18px !important;
+
+  font-weight: 750 !important;
+}
+
+/* Bottom muted text */
+.profile-page > .card:nth-child(4) .text-base-content\/60,
+.profile-page > .card:nth-child(6) .text-base-content\/60,
+.profile-page > .card:nth-child(7) .text-base-content\/60 {
+  color: #8290a5 !important;
+}
+
+/* =========================================================
+   FAVORITES
+   ========================================================= */
+
+.profile-page > .card:nth-child(4) .divide-y > a {
+  min-height: 72px;
+
+  padding: 14px 20px !important;
+
+  color: inherit !important;
+
+  border-color:
+    rgba(39, 55, 82, 0.75) !important;
+
+  background: transparent !important;
+
+  transition:
+    background 0.18s ease,
+    padding-left 0.18s ease;
+}
+
+.profile-page > .card:nth-child(4)
+  .divide-y > a:hover {
+  background: rgba(99, 91, 255, 0.055) !important;
+
+  padding-left: 23px !important;
+}
+
+.profile-page > .card:nth-child(4)
+  .font-medium {
+  color: #e1e6ef !important;
+
+  font-size: 13px !important;
+}
+
+.profile-page > .card:nth-child(4)
+  .badge-sm {
+  color: #8794a8 !important;
+
+  border-color: #34445d !important;
+
+  background: rgba(255, 255, 255, 0.015) !important;
+}
+
+.profile-page .badge-success {
+  background: rgba(34, 216, 120, 0.10) !important;
+
+  border-color: rgba(34, 216, 120, 0.25) !important;
+
+  color: #55df8a !important;
+}
+
+.profile-page .badge-warning {
+  background: rgba(245, 183, 46, 0.10) !important;
+
+  border-color: rgba(245, 183, 46, 0.25) !important;
+
+  color: #ffc45a !important;
+}
+
+.profile-page .badge-error {
+  background: rgba(255, 92, 104, 0.10) !important;
+
+  border-color: rgba(255, 92, 104, 0.25) !important;
+
+  color: #ff7a84 !important;
+}
+
+/* =========================================================
+   SOLVED PROBLEMS
+   Kept intact — simply placed underneath the 3-column row.
+   ========================================================= */
+
+.profile-page > .card:nth-child(5) {
+  min-width: 0;
+
+  margin: 0 !important;
+
+  border-radius: 14px !important;
+}
+
+.profile-page > .card:nth-child(5) .border-b {
+  border-color: #263752 !important;
+}
+
+.profile-page > .card:nth-child(5) .divide-y > a {
+  min-height: 62px;
+
+  border-color:
+    rgba(39, 55, 82, 0.70) !important;
+
+  color: inherit !important;
+}
+
+.profile-page > .card:nth-child(5)
+  .divide-y > a:hover {
+  background: rgba(99, 91, 255, 0.05) !important;
+}
+
+/* =========================================================
+   RECENT SUBMISSIONS
+   ========================================================= */
+
+.profile-page > .card:nth-child(6) {
+  overflow: hidden;
+}
+
+.profile-page > .card:nth-child(6) .input,
+.profile-page > .card:nth-child(6) .select {
+  height: 38px !important;
+  min-height: 38px !important;
+
+  background: #0c1522 !important;
+
+  border: 1px solid #30415c !important;
+
+  border-radius: 8px !important;
+
+  color: #d8deea !important;
+
+  box-shadow: none !important;
+}
+
+.profile-page > .card:nth-child(6)
+  .input::placeholder {
+  color: #647289 !important;
+}
+
+.profile-page > .card:nth-child(6)
+  .input:focus,
+.profile-page > .card:nth-child(6)
+  .select:focus {
+  outline: none !important;
+
+  border-color: #635bff !important;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 91, 255, 0.09) !important;
+}
+
+.profile-page > .card:nth-child(6) table {
+  width: 100%;
+
+  border-collapse: separate;
+
+  border-spacing: 0;
+}
+
+.profile-page > .card:nth-child(6) table thead {
+  background: #0c1521 !important;
+}
+
+.profile-page > .card:nth-child(6) table th {
+  color: #7d8aa0 !important;
+
+  font-size: 10px !important;
+
+  font-weight: 750 !important;
+
+  letter-spacing: 0.05em;
+
+  border-color: #263752 !important;
+}
+
+.profile-page > .card:nth-child(6) table td {
+  color: #cbd3df !important;
+
+  font-size: 12px !important;
+
+  border-color:
+    rgba(39, 55, 82, 0.72) !important;
+}
+
+.profile-page > .card:nth-child(6)
+  table tbody tr:hover {
+  background: rgba(99, 91, 255, 0.04) !important;
+}
+
+.profile-page > .card:nth-child(6)
+  .btn-xs {
+  height: 29px !important;
+  min-height: 29px !important;
+
+  padding: 0 10px !important;
+
+  border-radius: 7px !important;
+
+  font-size: 10px !important;
+}
+
+/* =========================================================
+   STATUS COLORS
+   ========================================================= */
+
+.profile-page .text-success {
+  color: var(--profile-green) !important;
+}
+
+.profile-page .text-warning {
+  color: var(--profile-yellow) !important;
+}
+
+.profile-page .text-error {
+  color: var(--profile-red) !important;
+}
+
+/* =========================================================
+   SUBMISSION ACTIVITY
+   ========================================================= */
+
+.profile-page > .card:nth-child(7) {
+  overflow: hidden;
+}
+
+.profile-page > .card:nth-child(7)
+  .overflow-x-auto {
+  width: 100%;
+
+  overflow-x: auto;
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    #4b586c transparent;
+}
+
+.profile-page > .card:nth-child(7)
+  .overflow-x-auto::-webkit-scrollbar {
+  height: 6px;
+}
+
+.profile-page > .card:nth-child(7)
+  .overflow-x-auto::-webkit-scrollbar-thumb {
+  background: #4b586c;
+
+  border-radius: 999px;
+}
+
+/* Activity cells */
+.profile-page > .card:nth-child(7)
+  .bg-base-300 {
+  background: #1b2637 !important;
+}
+
+.profile-page > .card:nth-child(7)
+  .bg-success\/30 {
+  background: #164e38 !important;
+}
+
+.profile-page > .card:nth-child(7)
+  .bg-success\/50 {
+  background: #18784a !important;
+}
+
+.profile-page > .card:nth-child(7)
+  .bg-success\/70 {
+  background: #20a95e !important;
+}
+
+.profile-page > .card:nth-child(7)
+  .bg-success {
+  background: #2edb78 !important;
+}
+
+.profile-page > .card:nth-child(7)
+  .rounded-sm {
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.profile-page > .card:nth-child(7)
+  .rounded-sm:hover {
+  transform: scale(1.12);
+
+  box-shadow:
+    0 0 8px rgba(34, 216, 120, 0.20);
+}
+
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+
+.profile-page .border-t {
+  border-color: #263752 !important;
+}
+
+.profile-page .border-t .btn {
+  border-color: #34445d !important;
+
+  background: rgba(255, 255, 255, 0.015) !important;
+
+  color: #aeb8c8 !important;
+}
+
+.profile-page .border-t .btn:hover:not(:disabled) {
+  border-color: rgba(99, 91, 255, 0.55) !important;
+
+  background: rgba(99, 91, 255, 0.07) !important;
+
+  color: #d1ceff !important;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.profile-page .btn {
+  text-transform: none !important;
+
+  font-weight: 650 !important;
+
+  border-radius: 8px !important;
+}
+
+.profile-page .btn-primary {
+  border: 0 !important;
+
+  color: #fff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #665fff,
+      #5148e8
+    ) !important;
+
+  box-shadow:
+    0 7px 20px rgba(81, 72, 232, 0.18) !important;
+}
+
+.profile-page .btn-primary:hover {
+  filter: brightness(1.07);
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   LOADING / ERROR
+   ========================================================= */
+
+.profile-page .loading-spinner {
+  color: #817aff !important;
+}
+
+/* =========================================================
+   SCROLLBARS
+   ========================================================= */
+
+.profile-page ::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.profile-page ::-webkit-scrollbar-track {
+  background: #0a1018;
+}
+
+.profile-page ::-webkit-scrollbar-thumb {
+  background: #2d394c;
+
+  border-radius: 999px;
+}
+
+.profile-page ::-webkit-scrollbar-thumb:hover {
+  background: #3b4960;
+}
+
+
+/* =========================================================
+   FINAL RESPONSIVE / LAYOUT
+   ---------------------------------------------------------
+   Desktop:
+     Header
+     Stats
+     Progress | Statistics
+     Submission Activity (full width)
+     Favorite Problems (full width)
+     Solved Problems | Recent Submissions
+
+   Mobile:
+     Everything stacks in the same logical order.
+
+   Profile.jsx structure is NOT changed.
+   ========================================================= */
+
+@media (min-width: 761px) {
+  .profile-page {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr) !important;
+
+    grid-template-areas:
+      "header header"
+      "stats stats"
+      "middle middle"
+      "activity activity"
+      "favorites favorites"
+      "solved recent" !important;
+
+    gap: 16px !important;
+  }
+
+  .profile-page > .card:nth-child(1) {
+    grid-area: header !important;
+  }
+
+  .profile-page > .grid.grid-cols-2.md\:grid-cols-4 {
+    grid-area: stats !important;
+  }
+
+  .profile-page > .grid.grid-cols-1.lg\:grid-cols-2 {
+    grid-area: middle !important;
+  }
+
+  .profile-page > .card:nth-child(7) {
+    grid-area: activity !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .profile-page > .card:nth-child(4) {
+    grid-area: favorites !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .profile-page > .card:nth-child(5) {
+    grid-area: solved !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .profile-page > .card:nth-child(6) {
+    grid-area: recent !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .profile-page > .grid.grid-cols-2.md\:grid-cols-4 {
+    display: grid !important;
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .profile-page > .grid.grid-cols-1.lg\:grid-cols-2 {
+    display: grid !important;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 761px) {
+  .profile-page {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .profile-page > .grid.grid-cols-2.md\:grid-cols-4 {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .profile-page {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+
+    grid-template-columns: 1fr !important;
+
+    grid-template-areas:
+      "header"
+      "stats"
+      "middle"
+      "activity"
+      "favorites"
+      "solved"
+      "recent" !important;
+
+    padding:
+      14px 12px 40px !important;
+
+    gap: 14px !important;
+  }
+
+  .profile-page > .card:nth-child(1) {
+    grid-area: header !important;
+  }
+
+  .profile-page > .grid.grid-cols-2.md\:grid-cols-4 {
+    grid-area: stats !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .profile-page > .grid.grid-cols-1.lg\:grid-cols-2 {
+    grid-area: middle !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .profile-page > .card:nth-child(7) {
+    grid-area: activity !important;
+  }
+
+  .profile-page > .card:nth-child(4) {
+    grid-area: favorites !important;
+  }
+
+  .profile-page > .card:nth-child(5) {
+    grid-area: solved !important;
+  }
+
+  .profile-page > .card:nth-child(6) {
+    grid-area: recent !important;
+  }
+
+  .profile-page > .card:nth-child(1) .p-6 {
+    padding: 20px !important;
+  }
+
+  .profile-page h1 {
+    font-size: 27px !important;
+  }
+
+  .profile-page .avatar > div {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .profile-page > .card:nth-child(6),
+  .profile-page > .card:nth-child(7) {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-page {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .profile-page > .grid.grid-cols-1.lg\:grid-cols-2
+    .grid-cols-3 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Keep the profile flush with the navbar, matching the Problem page. */
+.profile-page {
+  margin-top: -27px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

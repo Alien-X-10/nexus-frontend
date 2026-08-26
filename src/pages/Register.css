@@ -1,0 +1,817 @@
+/* =========================================================
+   REGISTER PAGE
+   Visual-only styling. Form/API logic stays in Register.jsx.
+   ========================================================= */
+
+.register-page {
+  position: relative;
+  min-height: calc(100vh - 72px);
+  box-sizing: border-box;
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.10), transparent 32%),
+    radial-gradient(circle at 88% 78%, rgba(99, 102, 241, 0.07), transparent 30%),
+    #11161d;
+}
+
+/* Ambient animated light */
+.register-orb {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  opacity: 0.18;
+  animation: registerFloat 8s ease-in-out infinite;
+}
+
+.register-orb-one {
+  top: 3%;
+  left: 4%;
+  background: #5b5bf7;
+}
+
+.register-orb-two {
+  right: 2%;
+  bottom: 0;
+  background: #7c3aed;
+  animation-delay: -4s;
+}
+
+.register-container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1180px;
+  height: min(570px, calc(100vh - 108px));
+
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 24px;
+
+  background: rgba(17, 22, 29, 0.86);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.35),
+    0 0 50px rgba(79, 70, 229, 0.07);
+
+  backdrop-filter: blur(18px);
+}
+
+/* =========================================================
+   LEFT SIDE
+   ========================================================= */
+
+.register-left {
+  position: relative;
+  overflow: hidden;
+  padding: 30px 42px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background:
+    radial-gradient(circle at 12% 10%, rgba(99, 102, 241, 0.28), transparent 42%),
+    linear-gradient(145deg, rgba(45, 45, 100, 0.78), rgba(22, 27, 35, 0.92));
+}
+
+.register-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.34;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+
+  background-size: 40px 40px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0.75)
+  );
+
+  animation: gridMove 14s linear infinite;
+}
+
+.register-brand,
+.register-hero,
+.register-terminal {
+  position: relative;
+  z-index: 2;
+}
+
+.register-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.register-code-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+
+  display: grid;
+  place-items: center;
+
+  color: #6865ff;
+  font-size: 17px;
+  font-weight: 800;
+
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  background: rgba(99, 102, 241, 0.12);
+
+  box-shadow: inset 0 0 20px rgba(99, 102, 241, 0.08);
+
+  animation: iconPulse 3s ease-in-out infinite;
+}
+
+.register-brand-title {
+  color: #f8fafc;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.register-pill {
+  margin-top: 7px;
+
+  width: fit-content;
+  padding: 6px 11px;
+
+  border-radius: 999px;
+
+  color: #7774ff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.register-pill-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #6865ff;
+  box-shadow: 0 0 10px rgba(104, 101, 255, 0.9);
+}
+
+.register-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.register-hero h1 {
+  margin: 0;
+
+  color: #f8fafc;
+  font-size: clamp(46px, 5vw, 64px);
+  line-height: 0.98;
+  letter-spacing: -3px;
+  font-weight: 750;
+}
+
+.register-hero h1 span {
+  color: #6561ff;
+  text-shadow: 0 0 30px rgba(101, 97, 255, 0.2);
+}
+
+.register-hero p {
+  margin: 0;
+
+  max-width: 300px;
+
+  color: #9aa7ba;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   TERMINAL
+   ========================================================= */
+
+.register-terminal {
+  width: 100%;
+  max-width: 510px;
+
+  margin: 0 auto;
+
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  background: rgba(14, 19, 25, 0.94);
+
+  box-shadow:
+    0 18px 35px rgba(0, 0, 0, 0.24),
+    0 0 30px rgba(79, 70, 229, 0.06);
+
+  transform: translateY(0);
+  animation: terminalFloat 5s ease-in-out infinite;
+}
+
+.terminal-header {
+  height: 34px;
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid rgba(148, 163, 184, 0.10);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.terminal-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.terminal-dots span:nth-child(1) {
+  background: #ef476f;
+}
+
+.terminal-dots span:nth-child(2) {
+  background: #f2b84b;
+}
+
+.terminal-dots span:nth-child(3) {
+  background: #06d6a0;
+}
+
+.terminal-file {
+  margin-left: 14px;
+  color: #64748b;
+  font-family: monospace;
+  font-size: 10px;
+}
+
+.terminal-status {
+  margin-left: auto;
+  color: #06d6a0;
+  font-size: 8px;
+  animation: statusBlink 2s ease-in-out infinite;
+}
+
+.terminal-body {
+  padding: 13px 18px 15px;
+
+  color: #a9b5c6;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.code-line {
+  min-height: 18px;
+}
+
+.code-indent {
+  padding-left: 20px;
+}
+
+.code-purple {
+  color: #a78bfa;
+}
+
+.code-white {
+  color: #cbd5e1;
+}
+
+.code-number {
+  display: inline-block;
+  color: #4ade80;
+  font-weight: 700;
+  animation: numberPulse 2.2s ease-in-out infinite;
+}
+
+.code-number-two {
+  animation-delay: 0.8s;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 13px;
+  margin-left: 5px;
+  vertical-align: -2px;
+
+  background: #6865ff;
+  box-shadow: 0 0 10px rgba(104, 101, 255, 0.8);
+
+  animation: cursorBlink 0.9s steps(1) infinite;
+}
+
+.terminal-output {
+  margin-top: 8px;
+  padding-top: 7px;
+
+  border-top: 1px solid rgba(148, 163, 184, 0.08);
+
+  color: #64748b;
+}
+
+.terminal-output strong {
+  margin-left: 8px;
+  color: #4ade80;
+  animation: outputGlow 2.2s ease-in-out infinite;
+}
+
+/* =========================================================
+   RIGHT SIDE
+   ========================================================= */
+
+.register-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 32px 52px;
+
+  background:
+    radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.06), transparent 38%),
+    rgba(15, 20, 27, 0.72);
+}
+
+.register-form-wrap {
+  width: 100%;
+  max-width: 430px;
+}
+
+.register-login-icon {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 18px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+
+  color: #6966ff;
+  font-family: monospace;
+  font-size: 17px;
+
+  border: 1px solid rgba(99, 102, 241, 0.30);
+  background: rgba(99, 102, 241, 0.07);
+
+  box-shadow:
+    inset 0 0 20px rgba(99, 102, 241, 0.06),
+    0 0 25px rgba(99, 102, 241, 0.05);
+
+  animation: iconFloat 3.5s ease-in-out infinite;
+}
+
+.register-heading h2 {
+  margin: 0;
+
+  color: #f8fafc;
+  font-size: clamp(30px, 3vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -1.7px;
+}
+
+.register-heading p {
+  margin: 10px 0 25px;
+
+  color: #8e9bad;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-group label {
+  margin-bottom: 7px;
+
+  color: #d8deea;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.field-group input {
+  width: 100%;
+  height: 45px;
+  box-sizing: border-box;
+
+  padding: 0 14px;
+
+  outline: none;
+
+  border: 1px solid #3b4655;
+  border-radius: 6px;
+
+  color: #e5e7eb;
+  font-size: 13px;
+
+  background: rgba(27, 33, 41, 0.82);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.field-group input::placeholder {
+  color: #66758a;
+}
+
+.field-group input:hover {
+  border-color: #536176;
+}
+
+.field-group input:focus {
+  border-color: #6361ff;
+
+  background: rgba(30, 36, 45, 0.96);
+
+  box-shadow:
+    0 0 0 3px rgba(99, 97, 255, 0.10),
+    0 0 22px rgba(99, 97, 255, 0.06);
+
+  transform: translateY(-1px);
+}
+
+.field-group input.field-error {
+  border-color: #ef476f;
+  box-shadow: 0 0 0 3px rgba(239, 71, 111, 0.08);
+}
+
+.error-message {
+  margin: 5px 0 0;
+  color: #fb7185;
+  font-size: 11px;
+}
+
+.register-submit {
+  position: relative;
+
+  width: 100%;
+  height: 48px;
+  margin-top: 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border: 0;
+  border-radius: 6px;
+
+  color: white;
+  background: linear-gradient(135deg, #635bff, #5b55f2);
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(79, 70, 229, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.register-submit::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -80%;
+
+  width: 55%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+  animation: buttonShine 3.8s ease-in-out infinite;
+}
+
+.register-submit:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 15px 32px rgba(79, 70, 229, 0.28),
+    0 0 25px rgba(99, 97, 255, 0.12);
+}
+
+.register-submit:active {
+  transform: translateY(0);
+}
+
+.register-arrow {
+  font-size: 17px;
+  transition: transform 0.2s ease;
+}
+
+.register-submit:hover .register-arrow {
+  transform: translateX(4px);
+}
+
+.register-footer {
+  margin-top: 18px;
+
+  text-align: center;
+
+  color: #7f8b9e;
+  font-size: 12px;
+}
+
+.register-footer a {
+  margin-left: 4px;
+
+  color: #706cff;
+  font-weight: 650;
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.register-footer a:hover {
+  color: #938fff;
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes registerFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(20px, -18px, 0);
+  }
+}
+
+@keyframes gridMove {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(40px, 40px, 0);
+  }
+}
+
+@keyframes iconPulse {
+  0%,
+  100% {
+    box-shadow: inset 0 0 20px rgba(99, 102, 241, 0.08);
+  }
+
+  50% {
+    box-shadow:
+      inset 0 0 20px rgba(99, 102, 241, 0.15),
+      0 0 18px rgba(99, 102, 241, 0.08);
+  }
+}
+
+@keyframes iconFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes terminalFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes cursorBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes numberPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    text-shadow: none;
+  }
+
+  50% {
+    transform: scale(1.08);
+    text-shadow: 0 0 12px rgba(74, 222, 128, 0.5);
+  }
+}
+
+@keyframes outputGlow {
+  0%,
+  100% {
+    text-shadow: none;
+  }
+
+  50% {
+    text-shadow: 0 0 12px rgba(74, 222, 128, 0.5);
+  }
+}
+
+@keyframes statusBlink {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes buttonShine {
+  0%,
+  45% {
+    left: -80%;
+  }
+
+  65%,
+  100% {
+    left: 130%;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .register-page {
+    padding: 18px 24px;
+  }
+
+  .register-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .register-left {
+    padding: 28px;
+  }
+
+  .register-right {
+    padding: 28px 34px;
+  }
+
+  .register-hero {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .register-hero h1 {
+    font-size: 48px;
+  }
+
+  .register-hero p {
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 760px) {
+  .register-page {
+    min-height: 100vh;
+    height: auto;
+    padding: 20px;
+    overflow: auto;
+  }
+
+  .register-container {
+    height: auto;
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .register-left {
+    min-height: 500px;
+  }
+
+  .register-right {
+    padding: 42px 28px;
+  }
+}
+
+@media (max-width: 520px) {
+  .register-page {
+    padding: 12px;
+  }
+
+  .register-container {
+    border-radius: 18px;
+  }
+
+  .register-left {
+    min-height: 470px;
+    padding: 24px 20px;
+  }
+
+  .register-hero {
+    margin-top: 24px;
+  }
+
+  .register-hero h1 {
+    font-size: 43px;
+  }
+
+  .register-hero p {
+    font-size: 13px;
+  }
+
+  .register-right {
+    padding: 34px 20px;
+  }
+
+  .register-heading h2 {
+    font-size: 31px;
+  }
+
+  .name-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .register-orb,
+  .register-grid,
+  .register-code-icon,
+  .register-login-icon,
+  .register-terminal,
+  .terminal-status,
+  .code-number,
+  .terminal-cursor,
+  .terminal-output strong,
+  .register-submit::before {
+    animation: none;
+  }
+}
