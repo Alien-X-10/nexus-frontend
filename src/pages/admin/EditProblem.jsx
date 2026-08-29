@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import api from "../../services/api";
 
 import "./EditProblem.css";
 
@@ -69,27 +70,31 @@ function EditProblem() {
                 setLoading(true);
                 setError("");
 
-                const response = await fetch(
-                    `http://localhost:3000/problem/problemById/${id}`,
-                    {
-                        credentials: "include"
-                    }
-                );
+                const response = await api.get(`/problem/problemById/${id}`);
 
-                const data = await response.json();
+const problem = response.data.problem || response.data;
 
-                if (!response.ok) {
+                // const response = await fetch(
+                //     `http://localhost:3000/problem/problemById/${id}`,
+                //     {
+                //         credentials: "include"
+                //     }
+                // );
 
-                    throw new Error(
-                        data.message ||
-                        "Failed to load problem"
-                    );
+                // const data = await response.json();
 
-                }
+                // if (!response.ok) {
+
+                //     throw new Error(
+                //         data.message ||
+                //         "Failed to load problem"
+                //     );
+
+                // }
 
 
-                const problem =
-                    data.problem || data;
+                // const problem =
+                //     data.problem || data;
 
 
                 setTitle(
