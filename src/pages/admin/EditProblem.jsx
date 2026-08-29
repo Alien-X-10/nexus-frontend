@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/api";
-
 import "./EditProblem.css";
+
+
 
 function EditProblem() {
 
@@ -386,159 +387,229 @@ const problem = response.data.problem || response.data;
     // SAVE
     // =====================================================
 
+    // const handleSubmit = async (event) => {
+
+    //     event.preventDefault();
+
+    //     setError("");
+    //     setSuccess("");
+
+
+    //     if (!title.trim()) {
+
+    //         setError(
+    //             "Problem title is required."
+    //         );
+
+    //         return;
+
+    //     }
+
+
+    //     if (!description.trim()) {
+
+    //         setError(
+    //             "Problem description is required."
+    //         );
+
+    //         return;
+
+    //     }
+
+
+    //     if (tags.length === 0) {
+
+    //         setError(
+    //             "Add at least one tag."
+    //         );
+
+    //         return;
+
+    //     }
+
+
+    //     if (visibleTestCases.length === 0) {
+
+    //         setError(
+    //             "Add at least one visible test case."
+    //         );
+
+    //         return;
+
+    //     }
+
+
+    //     if (hiddenTestCases.length === 0) {
+
+    //         setError(
+    //             "Add at least one hidden test case."
+    //         );
+
+    //         return;
+
+    //     }
+
+
+    //     try {
+
+    //         setSaving(true);
+
+
+    //         const response = await fetch(
+    //             `http://localhost:3000/problem/update/${id}`,
+    //             {
+    //                 method: "PUT",
+
+    //                 credentials: "include",
+
+    //                 headers: {
+    //                     "Content-Type":
+    //                         "application/json"
+    //                 },
+
+    //                 body: JSON.stringify({
+
+    //                     title:
+    //                         title.trim(),
+
+    //                     description:
+    //                         description.trim(),
+
+    //                     difficulty,
+
+    //                     tags,
+
+    //                     visibleTestCases,
+
+    //                     hiddenTestCases,
+
+    //                     startCode,
+
+    //                     referenceSolution
+
+    //                 })
+
+    //             }
+    //         );
+
+
+    //         const data =
+    //             await response.json();
+
+
+    //         if (!response.ok) {
+
+    //             throw new Error(
+    //                 data.message ||
+    //                 "Failed to update problem"
+    //             );
+
+    //         }
+
+
+    //         setSuccess(
+    //             "Problem updated successfully."
+    //         );
+
+
+    //         setTimeout(() => {
+
+    //             navigate(
+    //                 "/admin/problems"
+    //             );
+
+    //         }, 1000);
+
+
+    //     } catch (err) {
+
+    //         console.error(
+    //             "Update Problem Error:",
+    //             err
+    //         );
+
+    //         setError(
+    //             err.message ||
+    //             "Failed to update problem"
+    //         );
+
+    //     } finally {
+
+    //         setSaving(false);
+
+    //     }
+
+    // };
+
     const handleSubmit = async (event) => {
+    event.preventDefault();
 
-        event.preventDefault();
+    setError("");
+    setSuccess("");
 
-        setError("");
-        setSuccess("");
+    if (!title.trim()) {
+        setError("Problem title is required.");
+        return;
+    }
 
+    if (!description.trim()) {
+        setError("Problem description is required.");
+        return;
+    }
 
-        if (!title.trim()) {
+    if (tags.length === 0) {
+        setError("Add at least one tag.");
+        return;
+    }
 
-            setError(
-                "Problem title is required."
-            );
+    if (visibleTestCases.length === 0) {
+        setError("Add at least one visible test case.");
+        return;
+    }
 
-            return;
+    if (hiddenTestCases.length === 0) {
+        setError("Add at least one hidden test case.");
+        return;
+    }
 
-        }
+    try {
+        setSaving(true);
 
-
-        if (!description.trim()) {
-
-            setError(
-                "Problem description is required."
-            );
-
-            return;
-
-        }
-
-
-        if (tags.length === 0) {
-
-            setError(
-                "Add at least one tag."
-            );
-
-            return;
-
-        }
-
-
-        if (visibleTestCases.length === 0) {
-
-            setError(
-                "Add at least one visible test case."
-            );
-
-            return;
-
-        }
-
-
-        if (hiddenTestCases.length === 0) {
-
-            setError(
-                "Add at least one hidden test case."
-            );
-
-            return;
-
-        }
-
-
-        try {
-
-            setSaving(true);
-
-
-            const response = await fetch(
-                `http://localhost:3000/problem/update/${id}`,
-                {
-                    method: "PUT",
-
-                    credentials: "include",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        title:
-                            title.trim(),
-
-                        description:
-                            description.trim(),
-
-                        difficulty,
-
-                        tags,
-
-                        visibleTestCases,
-
-                        hiddenTestCases,
-
-                        startCode,
-
-                        referenceSolution
-
-                    })
-
-                }
-            );
-
-
-            const data =
-                await response.json();
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    data.message ||
-                    "Failed to update problem"
-                );
-
+        const response = await api.put(
+            `/problem/update/${id}`,
+            {
+                title: title.trim(),
+                description: description.trim(),
+                difficulty,
+                tags,
+                visibleTestCases,
+                hiddenTestCases,
+                startCode,
+                referenceSolution
             }
+        );
 
+        const data = response.data;
 
-            setSuccess(
-                "Problem updated successfully."
-            );
+        setSuccess("Problem updated successfully.");
 
+        setTimeout(() => {
+            navigate("/admin/problems");
+        }, 1000);
 
-            setTimeout(() => {
+    } catch (err) {
+        console.error("Update Problem Error:", err);
 
-                navigate(
-                    "/admin/problems"
-                );
+        setError(
+            err.response?.data?.message ||
+            err.message ||
+            "Failed to update problem"
+        );
 
-            }, 1000);
-
-
-        } catch (err) {
-
-            console.error(
-                "Update Problem Error:",
-                err
-            );
-
-            setError(
-                err.message ||
-                "Failed to update problem"
-            );
-
-        } finally {
-
-            setSaving(false);
-
-        }
-
-    };
+    } finally {
+        setSaving(false);
+    }
+};
 
 
     // =====================================================
