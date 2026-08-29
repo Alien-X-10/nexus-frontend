@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import api from "../../services/api";
 
 function AdminProtectedRoute() {
 
@@ -16,20 +17,16 @@ function AdminProtectedRoute() {
 
             try {
 
-                const response = await fetch(
-                    "http://localhost:3000/user/profile",
-                    {
-                        credentials: "include"
-                    }
-                );
+                const response =
+                    await api.get("/user/profile");
 
-                if (!response.ok) {
+                if (response.status < 200 || response.status >= 300) {
                     setIsAdmin(false);
                     return;
                 }
 
                 const data =
-                    await response.json();
+                    response.data;
 
                 setIsAdmin(
                     data?.user?.role === "admin"
@@ -110,3 +107,115 @@ function AdminProtectedRoute() {
 }
 
 export default AdminProtectedRoute;
+
+
+
+
+
+
+// import { useEffect, useState } from "react";
+// import { Navigate, Outlet } from "react-router-dom";
+
+// function AdminProtectedRoute() {
+
+//     const [loading, setLoading] =
+//         useState(true);
+
+//     const [isAdmin, setIsAdmin] =
+//         useState(false);
+
+
+//     useEffect(() => {
+
+//         const checkAdmin = async () => {
+
+//             try {
+
+//                 const response = await fetch(
+//                     "http://localhost:3000/user/profile",
+//                     {
+//                         credentials: "include"
+//                     }
+//                 );
+
+//                 if (!response.ok) {
+//                     setIsAdmin(false);
+//                     return;
+//                 }
+
+//                 const data =
+//                     await response.json();
+
+//                 setIsAdmin(
+//                     data?.user?.role === "admin"
+//                 );
+
+//             }
+//             catch (err) {
+
+//                 console.error(
+//                     "Admin Authentication Error:",
+//                     err
+//                 );
+
+//                 setIsAdmin(false);
+
+//             }
+//             finally {
+
+//                 setLoading(false);
+
+//             }
+
+//         };
+
+//         checkAdmin();
+
+//     }, []);
+
+
+  
+
+//     if (loading) {
+
+//         return (
+
+//             <div
+//                 style={{
+//                     minHeight: "100vh",
+//                     display: "flex",
+//                     alignItems: "center",
+//                     justifyContent: "center",
+//                     color: "white",
+//                     fontSize: "18px"
+//                 }}
+//             >
+//                 Checking admin access...
+//             </div>
+
+//         );
+
+//     }
+
+
+
+
+//     if (!isAdmin) {
+
+//         return (
+//             <Navigate
+//                 to="/login"
+//                 replace
+//             />
+//         );
+
+//     }
+
+
+
+
+//     return <Outlet />;
+
+// }
+
+// export default AdminProtectedRoute;
