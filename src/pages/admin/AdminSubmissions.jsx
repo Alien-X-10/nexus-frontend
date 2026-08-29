@@ -1,129 +1,84 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-
+import api from "../../services/api";
 import "./AdminSubmissions.css";
 
 function AdminSubmissions() {
-
     const [submissions, setSubmissions] = useState([]);
-
     const [loading, setLoading] = useState(true);
-
     const [error, setError] = useState("");
 
     const [search, setSearch] = useState("");
-
-    const [statusFilter, setStatusFilter] =
-        useState("All");
-
-    const [languageFilter, setLanguageFilter] =
-        useState("All");
-
+    const [statusFilter, setStatusFilter] = useState("All");
+    const [languageFilter, setLanguageFilter] = useState("All");
 
     // =====================================================
     // FETCH SUBMISSIONS
     // =====================================================
 
     const fetchSubmissions = async () => {
-
         try {
-
             setLoading(true);
-
             setError("");
 
-            const response = await fetch(
-                "http://localhost:3000/admin/submissions",
-                {
-                    credentials: "include"
-                }
+            const response = await api.get("/admin/submissions");
+
+            console.log(
+                "Admin Submissions:",
+                response.data
             );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-
-                throw new Error(
-                    data.message ||
-                    "Failed to load submissions"
-                );
-
-            }
 
             setSubmissions(
-                data.submissions || []
+                response.data?.submissions || []
             );
-
-        }
-        catch (err) {
-
+        } catch (err) {
             console.error(
                 "Fetch Submissions Error:",
                 err
             );
 
             setError(
+                err.response?.data?.message ||
                 err.message ||
                 "Failed to load submissions"
             );
-
-        }
-        finally {
-
+        } finally {
             setLoading(false);
-
         }
-
     };
 
+    // =====================================================
+    // LOAD SUBMISSIONS
+    // =====================================================
 
     useEffect(() => {
-
         fetchSubmissions();
-
     }, []);
-
 
     // =====================================================
     // STATUS
     // =====================================================
 
     const formatStatus = (status) => {
-
         const names = {
-
-            accepted:
-                "Accepted",
-
-            wrong:
-                "Wrong Answer",
-
-            runtime_error:
-                "Runtime Error",
-
-            compile_error:
-                "Compile Error",
-
-            tle:
-                "Time Limit Exceeded",
-
-            mle:
-                "Memory Limit Exceeded",
-
-            pending:
-                "Pending"
-
+            accepted: "Accepted",
+            wrong: "Wrong Answer",
+            runtime_error: "Runtime Error",
+            compile_error: "Compile Error",
+            tle: "Time Limit Exceeded",
+            mle: "Memory Limit Exceeded",
+            pending: "Pending",
         };
 
-        return names[status] || status || "Unknown";
-
+        return (
+            names[status] ||
+            status ||
+            "Unknown"
+        );
     };
 
-
     const getStatusClass = (status) => {
-
         switch (status) {
-
             case "accepted":
                 return "submission-status-accepted";
 
@@ -132,29 +87,18 @@ function AdminSubmissions() {
 
             default:
                 return "submission-status-error";
-
         }
-
     };
-
 
     // =====================================================
     // LANGUAGE
     // =====================================================
 
     const formatLanguage = (language) => {
-
         const languages = {
-
-            "c++":
-                "C++",
-
-            java:
-                "Java",
-
-            javascript:
-                "JavaScript"
-
+            "c++": "C++",
+            java: "Java",
+            javascript: "JavaScript",
         };
 
         return (
@@ -162,65 +106,52 @@ function AdminSubmissions() {
             language ||
             "Unknown"
         );
-
     };
-
 
     // =====================================================
     // DATE
     // =====================================================
 
     const formatRelativeTime = (date) => {
-
         if (!date) {
             return "—";
         }
 
-        const now =
-            new Date();
+        const now = new Date();
+        const created = new Date(date);
 
-        const created =
-            new Date(date);
-
-        const seconds =
-            Math.floor(
-                (now - created) / 1000
-            );
+        const seconds = Math.floor(
+            (now - created) / 1000
+        );
 
         if (seconds < 60) {
             return "Just now";
         }
 
-        const minutes =
-            Math.floor(
-                seconds / 60
-            );
+        const minutes = Math.floor(
+            seconds / 60
+        );
 
         if (minutes < 60) {
             return `${minutes} min ago`;
         }
 
-        const hours =
-            Math.floor(
-                minutes / 60
-            );
+        const hours = Math.floor(
+            minutes / 60
+        );
 
         if (hours < 24) {
             return `${hours} hr ago`;
         }
 
-        const days =
-            Math.floor(
-                hours / 24
-            );
+        const days = Math.floor(
+            hours / 24
+        );
 
         if (days < 30) {
-
-            return `${days} day${days === 1
-                ? ""
-                : "s"
-                } ago`;
-
+            return `${days} day${
+                days === 1 ? "" : "s"
+            } ago`;
         }
 
         return created.toLocaleDateString(
@@ -228,194 +159,147 @@ function AdminSubmissions() {
             {
                 year: "numeric",
                 month: "short",
-                day: "numeric"
+                day: "numeric",
             }
         );
-
     };
-
 
     // =====================================================
     // FILTER
     // =====================================================
 
-    const filteredSubmissions =
-        useMemo(() => {
+    const filteredSubmissions = useMemo(() => {
+        const searchValue = search
+            .trim()
+            .toLowerCase();
 
-            const searchValue =
-                search
-                    .trim()
-                    .toLowerCase();
+        return submissions.filter(
+            (submission) => {
+                const user =
+                    submission.userId;
 
-            return submissions.filter(
-                (submission) => {
+                const problem =
+                    submission.problemId;
 
-                    const user =
-                        submission.userId;
+                const userName =
+                    `${user?.firstName || ""} ${
+                        user?.lastName || ""
+                    }`.toLowerCase();
 
-                    const problem =
-                        submission.problemId;
+                const email =
+                    user?.emailId?.toLowerCase() ||
+                    "";
 
-                    const userName =
-                        `${user?.firstName || ""} ${user?.lastName || ""
-                            }`
-                            .toLowerCase();
+                const problemTitle =
+                    problem?.title?.toLowerCase() ||
+                    "";
 
-                    const email =
-                        user?.emailId
-                            ?.toLowerCase() || "";
+                const matchesSearch =
+                    !searchValue ||
+                    userName.includes(searchValue) ||
+                    email.includes(searchValue) ||
+                    problemTitle.includes(searchValue);
 
-                    const problemTitle =
-                        problem?.title
-                            ?.toLowerCase() || "";
+                const matchesStatus =
+                    statusFilter === "All" ||
+                    submission.status === statusFilter;
 
-                    const matchesSearch =
-                        !searchValue ||
-                        userName.includes(
-                            searchValue
-                        ) ||
-                        email.includes(
-                            searchValue
-                        ) ||
-                        problemTitle.includes(
-                            searchValue
-                        );
+                const matchesLanguage =
+                    languageFilter === "All" ||
+                    submission.language === languageFilter;
 
-                    const matchesStatus =
-                        statusFilter === "All" ||
-                        submission.status ===
-                        statusFilter;
-
-                    const matchesLanguage =
-                        languageFilter === "All" ||
-                        submission.language ===
-                        languageFilter;
-
-                    return (
-                        matchesSearch &&
-                        matchesStatus &&
-                        matchesLanguage
-                    );
-
-                }
-            );
-
-        }, [
-            submissions,
-            search,
-            statusFilter,
-            languageFilter
-        ]);
-
+                return (
+                    matchesSearch &&
+                    matchesStatus &&
+                    matchesLanguage
+                );
+            }
+        );
+    }, [
+        submissions,
+        search,
+        statusFilter,
+        languageFilter,
+    ]);
 
     // =====================================================
     // CLEAR FILTERS
     // =====================================================
 
     const clearFilters = () => {
-
         setSearch("");
-
         setStatusFilter("All");
-
         setLanguageFilter("All");
-
     };
-
 
     const hasFilters =
         search ||
         statusFilter !== "All" ||
         languageFilter !== "All";
 
-
     // =====================================================
     // LOADING
     // =====================================================
 
     if (loading) {
-
         return (
-
             <div className="admin-submissions-page">
-
                 <div className="admin-submissions-loading">
-
                     Loading submissions...
-
                 </div>
-
             </div>
-
         );
-
     }
-
 
     // =====================================================
     // ERROR
     // =====================================================
 
     if (error) {
-
         return (
-
             <div className="admin-submissions-page">
-
                 <div className="admin-submissions-error">
-
                     <h2>
                         Unable to load submissions
                     </h2>
 
-                    <p>
-                        {error}
-                    </p>
+                    <p>{error}</p>
 
                     <button
                         onClick={fetchSubmissions}
                     >
                         Try Again
                     </button>
-
                 </div>
-
             </div>
-
         );
-
     }
-
 
     // =====================================================
     // PAGE
     // =====================================================
 
     return (
-
         <div className="admin-submissions-page">
 
-
-            {/* ================================================= */}
-            {/* HEADER */}
-            {/* ================================================= */}
+            {/* =================================================
+                HEADER
+            ================================================= */}
 
             <div className="admin-submissions-header">
-
                 <div>
-
                     <div className="admin-submissions-eyebrow">
                         SUBMISSION MANAGEMENT
                     </div>
 
                     <h1>
-                        Submissions<span>.</span>
+                        Submissions
+                        <span>.</span>
                     </h1>
 
                     <p>
                         Monitor code submissions across the platform.
                     </p>
-
                 </div>
 
                 <button
@@ -424,18 +308,15 @@ function AdminSubmissions() {
                 >
                     ↻ Refresh
                 </button>
-
             </div>
 
-
-            {/* ================================================= */}
-            {/* SUMMARY */}
-            {/* ================================================= */}
+            {/* =================================================
+                SUMMARY
+            ================================================= */}
 
             <div className="admin-submissions-summary">
 
                 <div>
-
                     <span>
                         Total Submissions
                     </span>
@@ -443,18 +324,14 @@ function AdminSubmissions() {
                     <strong>
                         {submissions.length}
                     </strong>
-
                 </div>
 
-
                 <div>
-
                     <span>
                         Accepted
                     </span>
 
                     <strong className="summary-success">
-
                         {
                             submissions.filter(
                                 (submission) =>
@@ -462,20 +339,15 @@ function AdminSubmissions() {
                                     "accepted"
                             ).length
                         }
-
                     </strong>
-
                 </div>
 
-
                 <div>
-
                     <span>
                         Pending
                     </span>
 
                     <strong className="summary-warning">
-
                         {
                             submissions.filter(
                                 (submission) =>
@@ -483,14 +355,10 @@ function AdminSubmissions() {
                                     "pending"
                             ).length
                         }
-
                     </strong>
-
                 </div>
 
-
                 <div>
-
                     <span>
                         Showing
                     </span>
@@ -498,15 +366,13 @@ function AdminSubmissions() {
                     <strong>
                         {filteredSubmissions.length}
                     </strong>
-
                 </div>
 
             </div>
 
-
-            {/* ================================================= */}
-            {/* FILTERS */}
-            {/* ================================================= */}
+            {/* =================================================
+                FILTERS
+            ================================================= */}
 
             <div className="admin-submissions-filters">
 
@@ -515,12 +381,9 @@ function AdminSubmissions() {
                     placeholder="Search user or problem..."
                     value={search}
                     onChange={(e) =>
-                        setSearch(
-                            e.target.value
-                        )
+                        setSearch(e.target.value)
                     }
                 />
-
 
                 <select
                     value={statusFilter}
@@ -530,7 +393,6 @@ function AdminSubmissions() {
                         )
                     }
                 >
-
                     <option value="All">
                         All Statuses
                     </option>
@@ -562,9 +424,7 @@ function AdminSubmissions() {
                     <option value="pending">
                         Pending
                     </option>
-
                 </select>
-
 
                 <select
                     value={languageFilter}
@@ -574,7 +434,6 @@ function AdminSubmissions() {
                         )
                     }
                 >
-
                     <option value="All">
                         All Languages
                     </option>
@@ -590,78 +449,51 @@ function AdminSubmissions() {
                     <option value="javascript">
                         JavaScript
                     </option>
-
                 </select>
 
-
                 {hasFilters && (
-
                     <button
                         className="admin-submissions-clear"
                         onClick={clearFilters}
                     >
                         Clear
                     </button>
-
                 )}
 
             </div>
 
-
-            {/* ================================================= */}
-            {/* TABLE */}
-            {/* ================================================= */}
+            {/* =================================================
+                TABLE
+            ================================================= */}
 
             <div className="admin-submissions-table">
 
-
                 <div className="admin-submissions-table-header">
 
-                    <span>
-                        USER
-                    </span>
+                    <span>USER</span>
 
-                    <span>
-                        PROBLEM
-                    </span>
+                    <span>PROBLEM</span>
 
-                    <span>
-                        LANGUAGE
-                    </span>
+                    <span>LANGUAGE</span>
 
-                    <span>
-                        STATUS
-                    </span>
+                    <span>STATUS</span>
 
-                    <span>
-                        TEST CASES
-                    </span>
+                    <span>TEST CASES</span>
 
-                    <span>
-                        RUNTIME
-                    </span>
+                    <span>RUNTIME</span>
 
-                    <span>
-                        MEMORY
-                    </span>
+                    <span>MEMORY</span>
 
-                    <span>
-                        TIME
-                    </span>
+                    <span>TIME</span>
 
-                    <span>
-                        ACTION
-                    </span>
+                    <span>ACTION</span>
 
                 </div>
-
 
                 {filteredSubmissions.length === 0 ? (
 
                     <div className="admin-no-submissions">
-
                         No submissions found.
-
                     </div>
 
                 ) : (
@@ -676,190 +508,143 @@ function AdminSubmissions() {
                                 submission.problemId;
 
                             return (
-
                                 <div
                                     className="admin-submission-row"
-                                    key={
-                                        submission._id
-                                    }
+                                    key={submission._id}
                                 >
-
 
                                     {/* USER */}
 
                                     <div>
-
                                         <strong>
-
                                             {
                                                 user
                                                     ? `${user.firstName} ${user.lastName}`
                                                     : "Unknown User"
                                             }
-
                                         </strong>
 
                                         <small>
-
                                             {
                                                 user?.emailId ||
                                                 "—"
                                             }
-
                                         </small>
-
                                     </div>
-
 
                                     {/* PROBLEM */}
 
                                     <div>
-
                                         <strong>
-
                                             {
                                                 problem?.title ||
                                                 "Unknown Problem"
                                             }
-
                                         </strong>
 
                                         <small>
-
                                             {
                                                 problem?.difficulty ||
                                                 "—"
                                             }
-
                                         </small>
-
                                     </div>
-
 
                                     {/* LANGUAGE */}
 
                                     <div>
-
                                         {
                                             formatLanguage(
                                                 submission.language
                                             )
                                         }
-
                                     </div>
-
 
                                     {/* STATUS */}
 
                                     <div>
-
                                         <span
                                             className={
-                                                `submission-status ${getStatusClass(
-                                                    submission.status
-                                                )}`
+                                                `submission-status ${
+                                                    getStatusClass(
+                                                        submission.status
+                                                    )
+                                                }`
                                             }
                                         >
-
                                             {
                                                 formatStatus(
                                                     submission.status
                                                 )
                                             }
-
                                         </span>
-
                                     </div>
-
 
                                     {/* TEST CASES */}
 
                                     <div className="admin-test-cases">
-
                                         {
                                             submission.testCasesPassed ??
                                             0
                                         }
-
                                         /
-
                                         {
                                             submission.testCasesTotal ??
                                             0
                                         }
-
                                     </div>
-
 
                                     {/* RUNTIME */}
 
                                     <div>
-
                                         {
                                             submission.runtime != null
                                                 ? `${submission.runtime} ms`
                                                 : "—"
                                         }
-
                                     </div>
-
 
                                     {/* MEMORY */}
 
                                     <div>
-
                                         {
                                             submission.memory != null
                                                 ? `${submission.memory} KB`
                                                 : "—"
                                         }
-
                                     </div>
-
 
                                     {/* TIME */}
 
                                     <div className="admin-submission-time">
-
                                         {
                                             formatRelativeTime(
                                                 submission.createdAt
                                             )
                                         }
-
                                     </div>
-
 
                                     {/* ACTION */}
 
                                     <div>
-
                                         <Link
                                             to={`/admin/submissions/${submission._id}`}
                                             className="admin-submission-view"
                                         >
                                             View
                                         </Link>
-
                                     </div>
 
-
                                 </div>
-
                             );
-
                         }
                     )
-
                 )}
 
             </div>
 
-
         </div>
-
     );
-
 }
 
 export default AdminSubmissions;

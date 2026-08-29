@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import "./AdminProblems.css";
-// import { useNavigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function AdminProblems() {
+import api from "../../services/api";
+import "./AdminProblems.css";
 
+function AdminProblems() {
     const navigate = useNavigate();
+
     const [problems, setProblems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -15,60 +16,64 @@ function AdminProblems() {
     // ==========================================
 
     const fetchProblems = async () => {
-
         try {
-
             setLoading(true);
             setError("");
 
-            const response = await fetch(
-                "http://localhost:3000/problem/getAllProblem"
+            const response = await api.get(
+                "/problem/getAllProblem"
             );
 
-            const data = await response.json();
+            console.log(
+                "Admin Problems:",
+                response.data
+            );
 
-            if (!response.ok) {
-                throw new Error(
-                    data.message || "Failed to fetch problems"
-                );
-            }
+            /*
+             * Depending on the backend response,
+             * problems may be returned directly
+             * or inside data/problems/result.
+             */
+            const problemData =
+                response.data?.problems ||
+                response.data?.data ||
+                response.data?.result ||
+                response.data;
 
-            setProblems(data);
-
+            setProblems(
+                Array.isArray(problemData)
+                    ? problemData
+                    : []
+            );
         } catch (err) {
-
             console.error(
                 "Fetch Problems Error:",
                 err
             );
 
-            setError(err.message);
-
+            setError(
+                err.response?.data?.message ||
+                err.message ||
+                "Failed to fetch problems"
+            );
         } finally {
-
             setLoading(false);
-
         }
     };
-
 
     // ==========================================
     // LOAD PROBLEMS
     // ==========================================
 
     useEffect(() => {
-
         fetchProblems();
-
     }, []);
-
 
     // ==========================================
     // DELETE PROBLEM
     // ==========================================
 
     const handleDelete = async (problemId) => {
-
         const confirmed = window.confirm(
             "Are you sure you want to delete this problem?"
         );
@@ -78,22 +83,14 @@ function AdminProblems() {
         }
 
         try {
-
-            const response = await fetch(
-                `http://localhost:3000/problem/delete/${problemId}`,
-                {
-                    method: "DELETE",
-                    credentials: "include"
-                }
+            await api.delete(
+                `/problem/delete/${problemId}`
             );
 
-            const data = await response.text();
-
-            if (!response.ok) {
-                throw new Error(
-                    data || "Failed to delete problem"
-                );
-            }
+            console.log(
+                "Problem deleted:",
+                problemId
+            );
 
             // Remove deleted problem immediately
             setProblems((currentProblems) =>
@@ -102,50 +99,42 @@ function AdminProblems() {
                         problem._id !== problemId
                 )
             );
-
         } catch (err) {
-
             console.error(
                 "Delete Problem Error:",
                 err
             );
 
-            alert(err.message);
-
+            alert(
+                err.response?.data?.message ||
+                err.message ||
+                "Failed to delete problem"
+            );
         }
     };
-
 
     // ==========================================
     // LOADING
     // ==========================================
 
     if (loading) {
-
         return (
             <div className="admin-problems-page">
-
                 <div className="admin-problems-loading">
                     Loading problems...
                 </div>
-
             </div>
         );
-
     }
-
 
     // ==========================================
     // ERROR
     // ==========================================
 
     if (error) {
-
         return (
             <div className="admin-problems-page">
-
                 <div className="admin-problems-error">
-
                     <h2>
                         Unable to load problems
                     </h2>
@@ -159,21 +148,16 @@ function AdminProblems() {
                     >
                         Try Again
                     </button>
-
                 </div>
-
             </div>
         );
-
     }
-
 
     // ==========================================
     // PAGE
     // ==========================================
 
     return (
-
         <div className="admin-problems-page">
 
             {/* ==================================
@@ -183,7 +167,6 @@ function AdminProblems() {
             <div className="admin-problems-header">
 
                 <div>
-
                     <div className="admin-problems-eyebrow">
                         PROBLEM MANAGEMENT
                     </div>
@@ -193,23 +176,23 @@ function AdminProblems() {
                     </h1>
 
                     <p>
-                        Create, edit and manage coding problems.
+                        Create, edit and manage coding
+                        problems.
                     </p>
-
                 </div>
-
 
                 <button
                     className="admin-create-button"
                     onClick={() =>
-                        window.location.href = "/admin/problems/create"
+                        navigate(
+                            "/admin/problems/create"
+                        )
                     }
                 >
                     + Create Problem
                 </button>
 
             </div>
-
 
             {/* ==================================
                 PROBLEM COUNT
@@ -226,7 +209,6 @@ function AdminProblems() {
                 </strong>
 
             </div>
-
 
             {/* ==================================
                 PROBLEM LIST
@@ -254,7 +236,6 @@ function AdminProblems() {
 
                 </div>
 
-
                 {problems.length === 0 ? (
 
                     <div className="admin-no-problems">
@@ -270,7 +251,9 @@ function AdminProblems() {
                             key={problem._id}
                         >
 
-                            {/* PROBLEM */}
+                            {/* ==================================
+                                PROBLEM
+                            ================================== */}
 
                             <div className="admin-problem-title">
 
@@ -284,8 +267,9 @@ function AdminProblems() {
 
                             </div>
 
-
-                            {/* DIFFICULTY */}
+                            {/* ==================================
+                                DIFFICULTY
+                            ================================== */}
 
                             <div>
 
@@ -305,39 +289,48 @@ function AdminProblems() {
 
                             </div>
 
-
-                            {/* TAGS */}
+                            {/* ==================================
+                                TAGS
+                            ================================== */}
 
                             <div className="admin-problem-tags">
 
-                                {problem.tags?.length > 0
-                                    ? problem.tags.map(
+                                {problem.tags?.length > 0 ? (
+
+                                    problem.tags.map(
                                         (tag, index) => (
+
                                             <span
                                                 key={index}
                                             >
                                                 {tag}
                                             </span>
+
                                         )
                                     )
-                                    : (
-                                        <span>
-                                            —
-                                        </span>
-                                    )
-                                }
+
+                                ) : (
+
+                                    <span>
+                                        —
+                                    </span>
+
+                                )}
 
                             </div>
 
-
-                            {/* ACTIONS */}
+                            {/* ==================================
+                                ACTIONS
+                            ================================== */}
 
                             <div className="admin-problem-actions">
 
                                 <button
                                     className="admin-edit-button"
                                     onClick={() =>
-                                        navigate(`/admin/problems/${problem._id}/edit`)
+                                        navigate(
+                                            `/admin/problems/${problem._id}/edit`
+                                        )
                                     }
                                 >
                                     Edit

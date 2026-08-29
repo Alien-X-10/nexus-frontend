@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import api from "../../services/api";
+
 import "./AdminUsers.css";
 
 
@@ -83,25 +85,29 @@ function AdminUsers() {
 
             setError("");
 
-            const response = await fetch(
-                "http://localhost:3000/admin/users",
-                {
-                    credentials: "include"
-                }
-            );
+            // const response = await fetch(
+            //     "http://localhost:3000/admin/users",
+            //     {
+            //         credentials: "include"
+            //     }
+            // );
 
-            const data = await response.json();
+            // const data = await response.json();
 
-            if (!response.ok) {
+            // if (!response.ok) {
 
-                throw new Error(
-                    data.message ||
-                    "Failed to load users"
-                );
+            //     throw new Error(
+            //         data.message ||
+            //         "Failed to load users"
+            //     );
 
-            }
+            // }
 
-            setUsers(data.users || []);
+            // setUsers(data.users || []);
+
+            const response = await api.get("/admin/users");
+
+            setUsers(response.data?.users || []);
 
         }
         catch (err) {
@@ -470,11 +476,15 @@ function AdminUsers() {
              * already loaded from /admin/users.
              */
 
-            const response = await fetch(
-                `http://localhost:3000/admin/users/${user._id}`,
-                {
-                    credentials: "include"
-                }
+            // const response = await fetch(
+            //     `http://localhost:3000/admin/users/${user._id}`,
+            //     {
+            //         credentials: "include"
+            //     }
+            // );
+
+            const response = await api.get(
+                `/admin/users/${user._id}`
             );
 
 
@@ -522,54 +532,50 @@ function AdminUsers() {
     // =====================================================
 
     const changeUserRole = async () => {
-
         if (!selectedUser) {
-
             return;
-
         }
-
-
         try {
-
             setActionLoading(true);
-
             setActionError("");
-
-
             const newRole =
                 selectedUser.role === "admin"
                     ? "user"
                     : "admin";
-
-
             /*
              * Backend endpoint to create:
              *
              * PATCH /admin/users/:userId/role
              */
 
-            const response = await fetch(
-                `http://localhost:3000/admin/users/${selectedUser._id}/role`,
-                {
-                    method: "PATCH",
+            // const response = await fetch(
+            //     `http://localhost:3000/admin/users/${selectedUser._id}/role`,
+            //     {
+            //         method: "PATCH",
 
-                    credentials: "include",
+            //         credentials: "include",
 
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
+            //         headers: {
+            //             "Content-Type":
+            //                 "application/json"
+            //         },
 
-                    body: JSON.stringify({
-                        role: newRole
-                    })
-                }
-            );
+            //         body: JSON.stringify({
+            //             role: newRole
+            //         })
+            //     }
+            // );
 
+            const response = await api.patch(
+    `/admin/users/${selectedUser._id}/role`,
+    {
+        role: newRole
+    }
+);
+//  const data =
+                // await response.json();
 
-            const data =
-                await response.json();
+             const data = response.data;
 
 
             if (!response.ok) {
@@ -648,27 +654,34 @@ function AdminUsers() {
              * PATCH /admin/users/:userId/status
              */
 
-            const response = await fetch(
-                `http://localhost:3000/admin/users/${selectedUser._id}/status`,
-                {
-                    method: "PATCH",
+            // const response = await fetch(
+            //     `http://localhost:3000/admin/users/${selectedUser._id}/status`,
+            //     {
+            //         method: "PATCH",
 
-                    credentials: "include",
+            //         credentials: "include",
 
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
+            //         headers: {
+            //             "Content-Type":
+            //                 "application/json"
+            //         },
 
-                    body: JSON.stringify({
-                        status: newStatus
-                    })
-                }
-            );
+            //         body: JSON.stringify({
+            //             status: newStatus
+            //         })
+            //     }
+            // );
 
+            const response = await api.patch(
+    `/admin/users/${selectedUser._id}/status`,
+    {
+        status: newStatus
+    }
+);
+// const data =
+            //     await response.json();
 
-            const data =
-                await response.json();
+            const data = response.data;
 
 
             if (!response.ok) {
@@ -736,18 +749,24 @@ function AdminUsers() {
              * DELETE /admin/users/:userId
              */
 
-            const response = await fetch(
-                `http://localhost:3000/admin/users/${selectedUser._id}`,
-                {
-                    method: "DELETE",
+            // const response = await fetch(
+            //     `http://localhost:3000/admin/users/${selectedUser._id}`,
+            //     {
+            //         method: "DELETE",
 
-                    credentials: "include"
-                }
+            //         credentials: "include"
+            //     }
+            // );
+
+
+            // const data =
+            //     await response.json();
+
+            const response = await api.delete(
+                `/admin/users/${selectedUser._id}`
             );
 
-
-            const data =
-                await response.json();
+            const data = response.data;
 
 
             if (!response.ok) {
@@ -1310,10 +1329,9 @@ function AdminUsers() {
 
                                 <span
                                     className={
-                                        `admin-user-role ${
-                                            user.role === "admin"
-                                                ? "admin-role"
-                                                : "user-role"
+                                        `admin-user-role ${user.role === "admin"
+                                            ? "admin-role"
+                                            : "user-role"
                                         }`
                                     }
                                 >
@@ -1828,7 +1846,7 @@ function AdminUsers() {
                                 >
 
                                     {selectedUser.role ===
-                                    "admin"
+                                        "admin"
                                         ? "Make User"
                                         : "Make Admin"}
 
@@ -1848,7 +1866,7 @@ function AdminUsers() {
                                     {
                                         (selectedUser.status ||
                                             "active") ===
-                                        "active"
+                                            "active"
                                             ? "Suspend User"
                                             : "Activate User"
                                     }
@@ -1924,7 +1942,7 @@ function AdminUsers() {
 
                                             {
                                                 selectedUser.role ===
-                                                "admin"
+                                                    "admin"
                                                     ? "user"
                                                     : "admin"
                                             }
@@ -1998,7 +2016,7 @@ function AdminUsers() {
                                         {
                                             (selectedUser.status ||
                                                 "active") ===
-                                            "active"
+                                                "active"
                                                 ? "Suspend User?"
                                                 : "Activate User?"
                                         }
@@ -2012,7 +2030,7 @@ function AdminUsers() {
                                         {
                                             (selectedUser.status ||
                                                 "active") ===
-                                            "active"
+                                                "active"
                                                 ? "suspend"
                                                 : "activate"
                                         }
