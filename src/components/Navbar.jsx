@@ -7,20 +7,16 @@ import {
 } from "react-router-dom";
 
 import api from "../services/api";
-
 import "./Navbar.css";
 
 
 function Navbar() {
 
     const location = useLocation();
-
     const navigate = useNavigate();
 
     const [user, setUser] = useState(null);
-
     const [loadingUser, setLoadingUser] = useState(true);
-
     const [loggingOut, setLoggingOut] = useState(false);
 
 
@@ -86,17 +82,6 @@ function Navbar() {
         user?.role === "admin";
 
 
-    /*
-     * Admin → /admin
-     * Normal user → /profile
-     */
-
-    const profilePath =
-        isAdmin
-            ? "/admin"
-            : "/profile";
-
-
     // ==========================================
     // ACTIVE LINK
     // ==========================================
@@ -154,6 +139,8 @@ function Navbar() {
 
     const handleLogout = async () => {
 
+        console.log("🔥 LOGOUT FUNCTION CALLED");
+
         try {
 
             setLoggingOut(true);
@@ -204,15 +191,11 @@ function Navbar() {
                 >
 
                     <span className="nexus-brand-mark">
-
                         &lt;/&gt;
-
                     </span>
 
                     <span className="nexus-brand-text">
-
                         NEXUS<span>.</span>
-
                     </span>
 
                 </Link>
@@ -241,53 +224,65 @@ function Navbar() {
                 >
 
                     <span className="nav-link-icon">
-
                         ⌘
-
                     </span>
 
                     <span>
-
                         Problems
-
                     </span>
 
                 </Link>
 
 
                 {/* ========================================
-                    PROFILE / ADMIN
+                    PROFILE
                     ======================================== */}
 
                 {!loadingUser && user && (
 
                     <Link
-                        to={profilePath}
+                        to="/profile"
                         className={`nexus-nav-link ${
-                            isAdmin
-                                ? (
-                                    isActive("/admin")
-                                        ? "active"
-                                        : ""
-                                )
-                                : (
-                                    isActive("/profile")
-                                        ? "active"
-                                        : ""
-                                )
+                            isActive("/profile")
+                                ? "active"
+                                : ""
                         }`}
                     >
 
                         <span className="nav-link-icon">
-
                             ◉
-
                         </span>
 
                         <span>
-
                             Profile
+                        </span>
 
+                    </Link>
+
+                )}
+
+
+                {/* ========================================
+                    ADMIN — ADMIN ONLY
+                    ======================================== */}
+
+                {!loadingUser && user && isAdmin && (
+
+                    <Link
+                        to="/admin"
+                        className={`nexus-nav-link ${
+                            isActive("/admin")
+                                ? "active"
+                                : ""
+                        }`}
+                    >
+
+                        <span className="nav-link-icon">
+                            ◆
+                        </span>
+
+                        <span>
+                            Admin
                         </span>
 
                     </Link>
@@ -318,9 +313,7 @@ function Navbar() {
                                     : ""
                             }`}
                         >
-
                             Login
-
                         </Link>
 
 
@@ -334,15 +327,11 @@ function Navbar() {
                         >
 
                             <span>
-
                                 Get Started
-
                             </span>
 
                             <span className="register-arrow">
-
                                 →
-
                             </span>
 
                         </Link>

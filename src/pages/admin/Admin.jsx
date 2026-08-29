@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import api from "../../services/api";
 import "./Admin.css";
 
 function Admin() {
@@ -6,28 +7,31 @@ function Admin() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    // ==========================================
+    // LOAD ADMIN DASHBOARD
+    // ==========================================
     useEffect(() => {
         const fetchDashboard = async () => {
             try {
-                const response = await fetch(
-                    "http://localhost:3000/admin/dashboard",
-                    {
-                        credentials: "include",
-                    }
+                setLoading(true);
+                setError("");
+
+                const response = await api.get("/admin/dashboard");
+
+                console.log("Admin Dashboard:", response.data);
+
+                setData(response.data);
+            } catch (err) {
+                console.error(
+                    "Admin Dashboard Error:",
+                    err
                 );
 
-                const result = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(
-                        result.message || "Failed to load admin dashboard"
-                    );
-                }
-
-                setData(result);
-            } catch (err) {
-                console.error("Admin Dashboard Error:", err);
-                setError(err.message);
+                setError(
+                    err.response?.data?.message ||
+                    err.message ||
+                    "Failed to load admin dashboard"
+                );
             } finally {
                 setLoading(false);
             }
@@ -39,7 +43,6 @@ function Admin() {
     // ==========================================
     // LOADING
     // ==========================================
-
     if (loading) {
         return (
             <div className="admin-page">
@@ -53,18 +56,25 @@ function Admin() {
     // ==========================================
     // ERROR
     // ==========================================
-
     if (error) {
         return (
             <div className="admin-page">
                 <div className="admin-error">
-                    <h2>Unable to load dashboard</h2>
-                    <p>{error}</p>
+                    <h2>
+                        Unable to load dashboard
+                    </h2>
+
+                    <p>
+                        {error}
+                    </p>
                 </div>
             </div>
         );
     }
 
+    // ==========================================
+    // DATA
+    // ==========================================
     const users = data?.users || {};
     const problems = data?.problems || {};
     const submissions = data?.submissions || {};
@@ -72,10 +82,13 @@ function Admin() {
     const acceptanceRate =
         submissions.total > 0
             ? Math.round(
-                  (submissions.accepted / submissions.total) * 100
-              )
+                (submissions.accepted / submissions.total) * 100
+            )
             : 0;
 
+    // ==========================================
+    // RENDER
+    // ==========================================
     return (
         <div className="admin-page">
 
@@ -86,17 +99,20 @@ function Admin() {
             <div className="admin-header">
 
                 <div>
+
                     <div className="admin-eyebrow">
                         ADMIN CONTROL CENTER
                     </div>
 
                     <h1>
-                        Admin Dashboard<span>.</span>
+                        Admin Dashboard
+                        <span>.</span>
                     </h1>
 
                     <p>
                         Manage your coding platform from one place.
                     </p>
+
                 </div>
 
                 <button
