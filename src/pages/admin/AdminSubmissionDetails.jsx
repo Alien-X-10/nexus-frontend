@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import api from "../../services/api";
 
 import "./AdminSubmissionDetails.css";
 
@@ -24,62 +25,92 @@ function AdminSubmissionDetails() {
     // FETCH SUBMISSION
     // =====================================================
 
+    // const fetchSubmission = async () => {
+
+    //     try {
+
+    //         setLoading(true);
+
+    //         setError("");
+
+
+    //         const response = await fetch(
+    //             `http://localhost:3000/admin/submissions/${submissionId}`,
+    //             {
+    //                 credentials: "include"
+    //             }
+    //         );
+
+
+    //         const data =
+    //             await response.json();
+
+
+    //         if (!response.ok) {
+
+    //             throw new Error(
+    //                 data.message ||
+    //                 "Failed to load submission"
+    //             );
+
+    //         }
+
+
+    //         setSubmission(
+    //             data.submission
+    //         );
+
+    //     }
+    //     catch (err) {
+
+    //         console.error(
+    //             "Admin Submission Details Error:",
+    //             err
+    //         );
+
+    //         setError(
+    //             err.message ||
+    //             "Failed to load submission"
+    //         );
+
+    //     }
+    //     finally {
+
+    //         setLoading(false);
+
+    //     }
+
+    // };
+
     const fetchSubmission = async () => {
+    try {
+        setLoading(true);
+        setError("");
 
-        try {
+        const response = await api.get(
+            `/admin/submissions/${submissionId}`
+        );
 
-            setLoading(true);
+        const data = response.data;
 
-            setError("");
+        setSubmission(data.submission);
 
+    } catch (err) {
+        console.error(
+            "Admin Submission Details Error:",
+            err
+        );
 
-            const response = await fetch(
-                `http://localhost:3000/admin/submissions/${submissionId}`,
-                {
-                    credentials: "include"
-                }
-            );
+        setError(
+            err.response?.data?.message ||
+            err.message ||
+            "Failed to load submission"
+        );
 
-
-            const data =
-                await response.json();
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    data.message ||
-                    "Failed to load submission"
-                );
-
-            }
-
-
-            setSubmission(
-                data.submission
-            );
-
-        }
-        catch (err) {
-
-            console.error(
-                "Admin Submission Details Error:",
-                err
-            );
-
-            setError(
-                err.message ||
-                "Failed to load submission"
-            );
-
-        }
-        finally {
-
-            setLoading(false);
-
-        }
-
-    };
+    } finally {
+        setLoading(false);
+    }
+};
 
 
     useEffect(() => {
