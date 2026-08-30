@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
 import "./CreateProblem.css";
 
 const LANGUAGES = [
@@ -441,45 +442,89 @@ function CreateProblem() {
         };
 
 
+        // try {
+
+        //     setLoading(true);
+
+
+        //     const response = await fetch(
+        //         "http://localhost:3000/problem/create",
+        //         {
+        //             method: "POST",
+
+        //             credentials: "include",
+
+        //             headers: {
+        //                 "Content-Type": "application/json"
+        //             },
+
+        //             body: JSON.stringify(payload)
+        //         }
+        //     );
+
+
+        //     const data = await response.json().catch(
+        //         () => null
+        //     );
+
+
+        //     if (!response.ok) {
+
+        //         throw new Error(
+        //             data?.message ||
+        //             data?.error ||
+        //             (
+        //                 typeof data === "string"
+        //                     ? data
+        //                     : "Failed to create problem."
+        //             )
+        //         );
+
+        //     }
+
+
+        //     setSuccess(
+        //         "Problem created successfully."
+        //     );
+
+
+        //     setTimeout(() => {
+
+        //         navigate("/admin/problems");
+
+        //     }, 1000);
+
+
+        // } catch (err) {
+
+        //     console.error(
+        //         "Create Problem Error:",
+        //         err
+        //     );
+
+        //     setError(
+        //         err.message ||
+        //         "Something went wrong while creating the problem."
+        //     );
+
+        // } finally {
+
+        //     setLoading(false);
+
+        // }
+
         try {
 
             setLoading(true);
 
 
-            const response = await fetch(
-                "http://localhost:3000/problem/create",
-                {
-                    method: "POST",
-
-                    credentials: "include",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify(payload)
-                }
+            const response = await api.post(
+                "/problem/create",
+                payload
             );
 
 
-            const data = await response.json().catch(
-                () => null
-            );
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    data?.message ||
-                    data?.error ||
-                    (
-                        typeof data === "string"
-                            ? data
-                            : "Failed to create problem."
-                    )
-                );
-
-            }
+            const data = response.data;
 
 
             setSuccess(
@@ -501,10 +546,14 @@ function CreateProblem() {
                 err
             );
 
+
             setError(
+                err.response?.data?.message ||
+                err.response?.data?.error ||
                 err.message ||
                 "Something went wrong while creating the problem."
             );
+
 
         } finally {
 
